@@ -367,7 +367,14 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
         var html = '<option value="">— Selecciona tu OKR —</option>';
         teamNames.forEach(function(team){
           html += '<optgroup label="' + esc(team) + '">';
-          groups[team].forEach(function(g){
+          var areaFirst = groups[team].slice().sort(function(a, b){
+            var aArea = /^(OKR|OKT|BFI)/i.test(a.name);
+            var bArea = /^(OKR|OKT|BFI)/i.test(b.name);
+            if(aArea && !bArea) return -1;
+            if(!aArea && bArea) return 1;
+            return a.name.localeCompare(b.name);
+          });
+          areaFirst.forEach(function(g){
             html += '<option value="'+esc(g.gid)+'|'+esc(g.name)+'|'+esc(g.owner_email||'')+'">'+esc(g.name)+'</option>';
           });
           html += '</optgroup>';
