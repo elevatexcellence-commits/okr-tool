@@ -275,6 +275,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     if(action === 'submit')  { e.preventDefault(); doSubmit(); }
     if(action === 'reset')   { e.preventDefault(); doReset(); }
     if(action === 'task-cb') { doTaskToggle(el); }
+    if(action === 'show-comment') { showCommentArea(el.dataset.gid); }
     if(action === 'task-comment') { e.preventDefault(); doTaskComment(el); }
   });
 
@@ -402,7 +403,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           html+='</div>';
           html+='<div id="comment-sent-'+t.gid+'" style="display:none;margin-top:8px;">';
           html+='<span style="font-size:11px;color:#16a34a;font-weight:700;">✓ Enviado</span> · ';
-          html+='<span style="font-size:11px;color:#555;cursor:pointer;text-decoration:underline;" onclick="showCommentArea(\'' + t.gid + '\')">Añadir nuevo comentario</span>';
+          html+='<span style="font-size:11px;color:#555;cursor:pointer;text-decoration:underline;" data-action="show-comment" data-gid="'+t.gid+'">Añadir nuevo comentario</span>';
           html+='</div>';
           html+='</div></div>';
         });
@@ -431,15 +432,6 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
   }
 
   // ── Task comment ───────────────────────────────────────────────────────────
-  function showCommentArea(gid){
-    document.getElementById('comment-sent-'+gid).style.display='none';
-    document.getElementById('comment-area-'+gid).style.display='block';
-    var ta = document.getElementById('tc-'+gid);
-    if(ta){ ta.value=''; ta.style.height='30px'; }
-    var fi = document.getElementById('tf-'+gid);
-    if(fi) fi.value='';
-  }
-
   function showCommentArea(gid){
     document.getElementById('comment-sent-'+gid).style.display='none';
     document.getElementById('comment-area-'+gid).style.display='block';
