@@ -127,7 +127,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 
         <!-- OKR personal -->
         <div class="field">
-          <label>Tu OKR personal</label>
+          <label>OKR a actualizar</label>
           <div class="hint" id="okr-hint">Cargando OKRs...</div>
           <select id="f-goal" disabled>
             <option value="">— Selecciona tu OKR —</option>
@@ -334,7 +334,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
         hint.style.display='none';
         var raw = Array.isArray(data) ? data : (data.goals||data.data||[]);
         var goals = raw
-          .filter(function(g){ return g&&g.name&&!AREA_RE.test(g.name.trim()); })
+          .filter(function(g){ return g&&g.name; })
           .sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
         if(!goals.length){
           sel.innerHTML='<option value="">No hay OKRs para este trimestre</option>';
@@ -396,10 +396,10 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           if(meta.length) html+='<div class="tmeta">'+meta.join(' · ')+'</div>';
           html+='<div id="comment-area-'+t.gid+'" style="margin-top:8px;">';
           html+='<div style="display:flex;gap:6px;margin-bottom:4px;">';
-          html+='<textarea id="tc-'+t.gid+'" placeholder="Añadir comentario..." style="flex:1;padding:6px 8px;font-family:inherit;font-size:12px;border:1px solid #e0dfd8;resize:none;height:30px;outline:none;transition:height .15s;"></textarea>';
+          html+='<textarea id="tc-'+t.gid+'" placeholder="Comentario o enlace de Drive..." style="flex:1;padding:6px 8px;font-family:inherit;font-size:12px;border:1px solid #e0dfd8;resize:none;height:30px;outline:none;transition:height .15s;"></textarea>';
           html+='<button data-action="task-comment" data-gid="'+t.gid+'" style="padding:6px 10px;background:#000;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;height:30px;" id="cbtn-'+t.gid+'">Guardar</button>';
           html+='</div>';
-          html+='<input type="file" id="tf-'+t.gid+'" style="font-size:11px;color:#6b6b6b;width:100%;" accept="*/*">';
+          
           html+='</div>';
           html+='<div id="comment-sent-'+t.gid+'" style="display:none;margin-top:8px;">';
           html+='<span style="font-size:11px;color:#16a34a;font-weight:700;">✓ Enviado</span> · ';
@@ -432,6 +432,14 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
   }
 
   // ── Task comment ───────────────────────────────────────────────────────────
+  function checkFileSize(input){
+    var maxMB = 5;
+    if(input.files && input.files[0] && input.files[0].size > maxMB * 1024 * 1024){
+      alert('El archivo supera los 5MB. Por favor selecciona un archivo más pequeño.');
+      input.value = '';
+    }
+  }
+
   function showCommentArea(gid){
     document.getElementById('comment-sent-'+gid).style.display='none';
     document.getElementById('comment-area-'+gid).style.display='block';
