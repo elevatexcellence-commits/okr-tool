@@ -355,7 +355,15 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           if(!groups[team]) groups[team] = [];
           groups[team].push(g);
         });
-        var teamNames = Object.keys(groups).sort();
+        // Ordenar: OKRs de área primero (los que vienen del nombre), luego el resto alfabético
+        var areaRE = /^(OKR|OKT|BFI\s+OKR)/i;
+        var teamNames = Object.keys(groups).sort(function(a, b){
+          var aIsArea = groups[a].some(function(g){ return areaRE.test(g.name); });
+          var bIsArea = groups[b].some(function(g){ return areaRE.test(g.name); });
+          if(aIsArea && !bIsArea) return -1;
+          if(!aIsArea && bIsArea) return 1;
+          return a.localeCompare(b);
+        });
         var html = '<option value="">— Selecciona tu OKR —</option>';
         teamNames.forEach(function(team){
           html += '<optgroup label="' + esc(team) + '">';
