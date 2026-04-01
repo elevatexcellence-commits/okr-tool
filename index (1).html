@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualización OKR · Brooklyn Fitboxing</title>
+<style>
+:root {
+  --y: #FFCC00;
+  --k: #0a0a0a;
+  --g: #6b6b6b;
+  --gl: #f4f3ef;
+  --gm: #e2e0d8;
+  --w: #ffffff;
+  --green: #16a34a;
+  --gbg: #f0fdf4;
+  --gbd: #bbf7d0;
+  --red: #dc2626;
+  --rbg: #fef2f2;
+  --rbd: #fecaca;
+  --amber: #b45309;
+  --abg: #fffbeb;
+  --abd: #fde68a;
+  --blue: #2563eb;
+  --bbg: #eff6ff;
+  --bbd: #bfdbfe;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--gl);
+  color: var(--k);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  background: var(--k);
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 20px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.topbar-box {
+  background: var(--y);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--k);
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+}
+.topbar-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.topbar-label {
+  padding-left: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px 80px;
+}
+
+.card {
+  background: var(--w);
+  width: 100%;
+  max-width: 560px;
+  border-top: 4px solid var(--y);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.card-header {
+  padding: 32px 36px 24px;
+  border-bottom: 1px solid var(--gm);
+}
+.card-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.card-header p {
+  font-size: 13px;
+  color: var(--g);
+  line-height: 1.5;
+}
+
+.card-body { padding: 28px 36px 36px; }
+
+/* FIELDS */
+.field { margin-bottom: 22px; }
+.field label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g);
+  margin-bottom: 8px;
+}
+.field select, .field textarea {
+  width: 100%;
+  border: 1.5px solid var(--gm);
+  background: var(--w);
+  color: var(--k);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .15s;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.field select:focus, .field textarea:focus {
+  border-color: var(--k);
+}
+.select-wrap {
+  position: relative;
+}
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--g);
+  pointer-events: none;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+/* STATUS PILLS */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.status-pill {
+  border: 1.5px solid var(--gm);
+  background: var(--w);
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--k);
+  transition: all .15s;
+  user-select: none;
+}
+.status-pill:hover { border-color: #aaa; }
+.status-pill .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-pill.selected-on_track    { border-color: var(--green); background: var(--gbg); color: var(--green); }
+.status-pill.selected-at_risk     { border-color: var(--amber); background: var(--abg); color: var(--amber); }
+.status-pill.selected-off_track   { border-color: var(--red);   background: var(--rbg); color: var(--red); }
+.status-pill.selected-on_track .dot  { background: var(--green); }
+.status-pill.selected-at_risk .dot   { background: var(--amber); }
+.status-pill.selected-off_track .dot { background: var(--red); }
+.dot-on_track  { background: var(--green); }
+.dot-at_risk   { background: var(--amber); }
+.dot-off_track { background: var(--red); }
+.dot-default   { background: #ccc; }
+
+/* CURRENT STATUS BADGE */
+.current-status {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 12px;
+  border: 1px solid var(--gm);
+  background: var(--gl);
+  margin-bottom: 16px;
+}
+.current-status.visible { display: flex; }
+.current-status .label { color: var(--g); margin-right: 2px; }
+
+/* TASKS */
+.tasks-section {
+  display: none;
+  margin-bottom: 22px;
+}
+.tasks-section.visible { display: block; }
+.tasks-section label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g);
+  margin-bottom: 8px;
+}
+.tasks-list {
+  border: 1.5px solid var(--gm);
+  max-height: 160px;
+  overflow-y: auto;
+}
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--gl);
+  cursor: pointer;
+  transition: background .1s;
+}
+.task-item:last-child { border-bottom: none; }
+.task-item:hover { background: var(--gl); }
+.task-item input[type=checkbox] { flex-shrink: 0; cursor: pointer; }
+.task-item.completed { opacity: 0.45; }
+.task-name { flex: 1; }
+.task-assignee { font-size: 11px; color: var(--g); white-space: nowrap; }
+.tasks-loading {
+  padding: 16px 12px;
+  font-size: 13px;
+  color: var(--g);
+  text-align: center;
+}
+
+/* SUBMIT */
+.btn-submit {
+  width: 100%;
+  background: var(--k);
+  color: var(--w);
+  border: none;
+  padding: 14px 20px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  margin-top: 4px;
+}
+.btn-submit:hover { background: #222; }
+.btn-submit:active { transform: scale(0.99); }
+.btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+/* MESSAGES */
+.msg {
+  display: none;
+  padding: 12px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.msg.visible { display: flex; align-items: center; gap: 8px; }
+.msg-ok  { background: var(--gbg); color: var(--green); border: 1px solid var(--gbd); }
+.msg-err { background: var(--rbg); color: var(--red);   border: 1px solid var(--rbd); }
+
+/* DIVIDER */
+.divider {
+  border: none;
+  border-top: 1px solid var(--gm);
+  margin: 24px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-box">BF</div>
+    <span class="topbar-name">Brooklyn Fitboxing</span>
+  </div>
+  <span class="topbar-label">Actualiza tu OKR</span>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-header">
+      <h1>Informa del estado actual de tu objetivo</h1>
+      <p>Selecciona tu OKR, indica el estado y añade un comentario si lo necesitas.</p>
+    </div>
+    <div class="card-body">
+
+      <!-- MSG -->
+      <div class="msg msg-ok" id="msgOk">✓ Actualización enviada correctamente.</div>
+      <div class="msg msg-err" id="msgErr">✗ <span id="msgErrText">Error al enviar. Inténtalo de nuevo.</span></div>
+
+      <!-- GOAL SELECT -->
+      <div class="field">
+        <label>Objetivo</label>
+        <div class="select-wrap">
+          <select id="goalSelect" onchange="onGoalChange()">
+            <option value="">— Selecciona tu objetivo —</option>
+            <optgroup label="2T 2026">
+              <option value="1213831319305450|OKR 2T 2026 - ACADEMY|hector.santovena@brooklynfitboxing.com|Héctor Santoveña|">OKR 2T 2026 - ACADEMY</option>
+              <option value="1213831321807097|OKR 2T 2026 - COMMERCIAL|kelly.ramirez@brooklynfitboxing.com|Kelly Ramírez|">OKR 2T 2026 - COMMERCIAL</option>
+              <option value="1213831319305456|OKR 2T 2026 - DIGITAL PRODUCT|pablo.nebrera@brooklynfitboxing.com|Pablo Nebrera|">OKR 2T 2026 - DIGITAL PRODUCT</option>
+              <option value="1213831319305452|OKR 2T 2026 - EXPANSION|antonella.marco@brooklynfitboxing.com|Antonella Marco|">OKR 2T 2026 - EXPANSION</option>
+              <option value="1213831324226855|OKR 2T 2026 - LEGAL|cristina.calleja@brooklynfitboxing.com|Cristina Calleja|">OKR 2T 2026 - LEGAL</option>
+              <option value="1213831324226863|OKR 2T 2026 - MARKETING|adolfo@brooklynfitboxing.com|Adolfo Fernández|">OKR 2T 2026 - MARKETING</option>
+              <option value="1213830999493941|OKR 2T 2026 - PEOPLE|elena.lopez@brooklynfitboxing.com|Elena López|">OKR 2T 2026 - PEOPLE</option>
+              <option value="1213830999493945|OKR 2T 2026 - POWER UP|adolfo@brooklynfitboxing.com|Adolfo Fernández|">OKR 2T 2026 - POWER UP</option>
+              <option value="1213831318051545|BFI OKR 2T2026|carlos.fernandez@brooklynfitboxing.com|Carlos Fernández|1211351183076154">BFI OKR 2T2026</option>
+            </optgroup>
+            <optgroup label="1T 2026">
+              <option value="1212556603278677|BFI OKR 1T2026|pablo.sacristan@brooklynfitboxing.com|Pablo Sacristán|">BFI OKR 1T2026</option>
+              <option value="1212851079304871|OKR 1T 2026 - LEGAL|cristina.calleja@brooklynfitboxing.com|Cristina Calleja|">OKR 1T 2026 - LEGAL</option>
+              <option value="1212681019974361|OKR 1T 2026 - MARKETING|adolfo@brooklynfitboxing.com|Adolfo Fernández|">OKR 1T 2026 - MARKETING</option>
+              <option value="1212681017220474|OKT 1T 2026 - POWER UP|adolfo@brooklynfitboxing.com|Adolfo Fernández|">OKT 1T 2026 - POWER UP</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <!-- CURRENT STATUS -->
+      <div class="current-status" id="currentStatus">
+        <span class="label">Estado actual:</span>
+        <span class="dot" id="currentDot"></span>
+        <span id="currentStatusText"></span>
+      </div>
+
+      <!-- STATUS PILLS -->
+      <div class="field" id="statusField" style="display:none">
+        <label>Nuevo estado</label>
+        <div class="status-grid">
+          <div class="status-pill" id="pill_on_track" onclick="pickStatus('on_track')">
+            <span class="dot dot-on_track"></span> En línea
+          </div>
+          <div class="status-pill" id="pill_at_risk" onclick="pickStatus('at_risk')">
+            <span class="dot dot-at_risk"></span> En riesgo
+          </div>
+          <div class="status-pill" id="pill_off_track" onclick="pickStatus('off_track')">
+            <span class="dot dot-off_track"></span> Desviado
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMENT -->
+      <div class="field" id="commentField" style="display:none">
+        <label>Comentario del objetivo</label>
+        <textarea id="comment" placeholder="¿Cómo va el objetivo? Novedades, bloqueos, próximos pasos…" rows="4"></textarea>
+      </div>
+
+      <hr class="divider" id="divider" style="display:none">
+
+      <!-- SUBMIT -->
+      <button class="btn-submit" id="btnSubmit" onclick="submitForm()" style="display:none">
+        Enviar actualización
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const WEBHOOK = 'https://workflows.brooklynfitzone.com/webhook/okr-update';
+const WEBHOOK_TASKS = 'https://workflows.brooklynfitzone.com/webhook/okr-tareas';
+
+let selectedStatus = null;
+
+const STATUS_LABELS = {
+  on_track: 'En línea',
+  at_risk: 'En riesgo',
+  off_track: 'Desviado'
+};
+const STATUS_COLORS = {
+  on_track: 'var(--green)',
+  at_risk: 'var(--amber)',
+  off_track: 'var(--red)'
+};
+
+function onGoalChange() {
+  const val = document.getElementById('goalSelect').value;
+  selectedStatus = null;
+
+  // Reset pills
+  ['on_track','at_risk','off_track'].forEach(s => {
+    document.getElementById('pill_' + s).className = 'status-pill';
+  });
+
+  // Hide current status
+  document.getElementById('currentStatus').classList.remove('visible');
+
+  if (!val) {
+    document.getElementById('statusField').style.display = 'none';
+    document.getElementById('commentField').style.display = 'none';
+    document.getElementById('divider').style.display = 'none';
+    document.getElementById('btnSubmit').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('statusField').style.display = 'block';
+  document.getElementById('commentField').style.display = 'block';
+  document.getElementById('divider').style.display = 'block';
+  document.getElementById('btnSubmit').style.display = 'block';
+
+  // Load current status from Asana via N8N
+  const parts = val.split('|');
+  const goalGid = parts[0];
+  loadCurrentStatus(goalGid);
+}
+
+async function loadCurrentStatus(goalGid) {
+  try {
+    const res = await fetch(WEBHOOK_TASKS + '?goal_gid=' + goalGid);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && data.current_status) {
+      const s = data.current_status;
+      const el = document.getElementById('currentStatus');
+      const dot = document.getElementById('currentDot');
+      const txt = document.getElementById('currentStatusText');
+      dot.style.background = STATUS_COLORS[s] || '#ccc';
+      txt.textContent = STATUS_LABELS[s] || s;
+      el.classList.add('visible');
+    }
+  } catch(e) {
+    // Silent fail — current status is optional
+  }
+}
+
+function pickStatus(s) {
+  selectedStatus = s;
+  ['on_track','at_risk','off_track'].forEach(k => {
+    const el = document.getElementById('pill_' + k);
+    el.className = 'status-pill' + (k === s ? ' selected-' + k : '');
+  });
+}
+
+async function submitForm() {
+  const goalVal = document.getElementById('goalSelect').value;
+  if (!goalVal) return alert('Selecciona un objetivo.');
+  if (!selectedStatus) return alert('Selecciona un estado.');
+
+  const parts = goalVal.split('|');
+  const goalGid   = parts[0];
+  const goalName  = parts[1] || '';
+  const ownerEmail = parts[2] || '';
+  const ownerName  = parts[3] || '';
+  const comment   = document.getElementById('comment').value.trim();
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  document.getElementById('msgOk').classList.remove('visible');
+  document.getElementById('msgErr').classList.remove('visible');
+
+  try {
+    const res = await fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        goal_gid:    goalGid,
+        goal_name:   goalName,
+        owner_email: ownerEmail,
+        owner_name:  ownerName,
+        status:      selectedStatus,
+        comment:     comment
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById('msgOk').classList.add('visible');
+      document.getElementById('comment').value = '';
+      selectedStatus = null;
+      ['on_track','at_risk','off_track'].forEach(s => {
+        document.getElementById('pill_' + s).className = 'status-pill';
+      });
+      document.getElementById('goalSelect').value = '';
+      document.getElementById('statusField').style.display = 'none';
+      document.getElementById('commentField').style.display = 'none';
+      document.getElementById('divider').style.display = 'none';
+      document.getElementById('btnSubmit').style.display = 'none';
+      document.getElementById('currentStatus').classList.remove('visible');
+    } else {
+      throw new Error('HTTP ' + res.status);
+    }
+  } catch(e) {
+    document.getElementById('msgErrText').textContent = 'Error al enviar. Comprueba tu conexión e inténtalo de nuevo.';
+    document.getElementById('msgErr').classList.add('visible');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Enviar actualización';
+}
+</script>
+
+</body>
+</html>
