@@ -192,6 +192,12 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
             <label class="ri"><input type="checkbox" class="xr" id="xr-mb"><span class="rn">Maria Blanco</span></label>
             <label class="ri"><input type="checkbox" class="xr" id="xr-cf"><span class="rn">Carlos Fernández</span></label>
             <label class="ri"><input type="checkbox" class="xr" id="xr-ex" checked><span class="rn">Elevate Xcellence</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-ad"><span class="rn">Adolfo Fernández</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-cp"><span class="rn">Cristina Pujol</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-jb"><span class="rn">Jesús Blanco</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-cc"><span class="rn">Cristina Calleja</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-jm"><span class="rn">Julia Miralles</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-ca"><span class="rn">Carlos Alonso</span></label>
           </div>
           <div class="rx">
             <label>Añadir otro email (opcional)</label>
@@ -231,7 +237,13 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     'xr-pn': 'pablo@' + d,
     'xr-mb': 'maria@' + d,
     'xr-cf': 'carlos.fernandez@' + d,
-    'xr-ex': 'elevate.xcellence@' + d
+    'xr-ex': 'elevate.xcellence@' + d,
+    'xr-ad': 'adolfo@' + d,
+    'xr-cp': 'cristina.pujol@' + d,
+    'xr-jb': 'jesus.blanco@' + d,
+    'xr-cc': 'cristina.calleja@' + d,
+    'xr-jm': 'julia.miralles@' + d,
+    'xr-ca': 'carlos.alonso@' + d
   };
   Object.keys(EMAILS).forEach(function(id){
     var el = document.getElementById(id);
@@ -574,6 +586,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 
   // ── Reset ──────────────────────────────────────────────────────────────────
   function doReset(){
+    var prevGoalGid = state.goalGid;
     state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner='';
     document.getElementById('f-name').value='';
     document.getElementById('f-comment').value='';
@@ -587,7 +600,8 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     btn.disabled=false; btn.classList.remove('loading');
     btn.firstChild.nodeValue='Enviar actualización ';
     document.getElementById('fa').classList.remove('hidden');
-etElementById('success-screen').classList.remove('show');
+    document.getElementById('success-screen').classList.remove('show');
+    window.scrollTo(0, 0);
     loadGoals(state.periodGid);
   }
 
