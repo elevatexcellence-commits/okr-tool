@@ -343,7 +343,15 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
         // Agrupar por equipo
         var groups = {};
         goals.forEach(function(g){
-          var team = (g.team_name || g.owner_name || 'Sin equipo').replace(/^BFI\s+/i,'');
+          var name = g.name || '';
+          var areaMatch = name.match(/(?:OKR|OKT|BFI\s+OKR)\s*(?:\dT\s*\d{4}|\d{4})\s*[-–]?\s*(.+)/i);
+          var team;
+          if(areaMatch) {
+            team = areaMatch[1].trim() || 'Área';
+          } else {
+            team = g.team_name || g.owner_name || 'Personal';
+          }
+          team = team.replace(/^BFI\s+/i,'');
           if(!groups[team]) groups[team] = [];
           groups[team].push(g);
         });
