@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualización OKR · Brooklyn Fitboxing</title>
+<style>
+:root{--y:#FFCC00;--k:#000;--g:#9a999e;--gl:#f2f2f0;--gm:#e0dfd8;--w:#fff;--green:#16a34a;--gbg:#f0fdf4;--red:#dc2626;--rbg:#fef2f2;--amber:#b45309;--abg:#fffbeb;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl);color:var(--k);min-height:100vh;display:flex;flex-direction:column;}
+.topbar{background:var(--k);padding:0 28px;height:56px;display:flex;align-items:center;flex-shrink:0;}
+.topbar-brand{display:flex;align-items:center;gap:12px;padding-right:20px;border-right:1px solid rgba(255,255,255,0.12);}
+.topbar-box{background:var(--y);width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--k);flex-shrink:0;}
+.topbar-name{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;}
+.topbar-label{padding-left:20px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.4);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;}
+.main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:48px 20px 60px;}
+.card{background:var(--w);width:100%;max-width:580px;border-top:4px solid var(--y);}
+.card-header{padding:32px 36px 24px;border-bottom:1px solid var(--gm);}
+.card-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;}
+.card-header p{font-size:13px;color:var(--g);}
+.card-body{padding:28px 36px 36px;}
+.field{margin-bottom:22px;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:8px;}
+.field select,.field textarea,.field input[type=email]{width:100%;padding:11px 14px;border:1.5px solid var(--gm);background:var(--w);color:var(--k);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;outline:none;transition:border-color .15s;appearance:none;position:relative;z-index:1;}
+.field select:focus,.field textarea:focus,.field input:focus{border-color:var(--k);}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239a999e' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+.field select:disabled{opacity:.5;cursor:not-allowed;}
+.field textarea{resize:vertical;min-height:88px;line-height:1.6;}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.pbtn{padding:10px 8px;border:1.5px solid var(--gm);background:var(--w);cursor:pointer;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;text-align:center;transition:all .12s;}
+.pbtn:hover{border-color:var(--k);}
+.pbtn.active{border-color:var(--k);background:var(--k);color:var(--w);}
+.slbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:8px;}
+.sglbl{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--g);margin-bottom:6px;margin-top:10px;}
+.sglbl:first-of-type{margin-top:0;}
+.sgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;}
+.sgrid4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.sbtn{padding:10px 6px;border:1.5px solid var(--gm);background:var(--w);cursor:pointer;text-align:center;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;transition:all .12s;}
+.sbtn:hover{border-color:var(--k);}
+.sbtn .dot{width:8px;height:8px;border-radius:50%;margin:0 auto 6px;}
+.sbtn .sl{display:block;font-size:11px;font-weight:700;}
+.sbtn.a-green{border-color:#16a34a;background:#f0fdf4;}.sbtn.a-green .sl{color:#16a34a;}
+.sbtn.a-yellow{border-color:#b45309;background:#fffbeb;}.sbtn.a-yellow .sl{color:#b45309;}
+.sbtn.a-red{border-color:#dc2626;background:#fef2f2;}.sbtn.a-red .sl{color:#dc2626;}
+.sbtn.a-achieved{border-color:#059669;background:#ecfdf5;}.sbtn.a-achieved .sl{color:#059669;}
+.sbtn.a-partial{border-color:#d97706;background:#fffbeb;}.sbtn.a-partial .sl{color:#d97706;}
+.sbtn.a-missed{border-color:#dc2626;background:#fef2f2;}.sbtn.a-missed .sl{color:#dc2626;}
+.sbtn.a-dropped{border-color:#6b7280;background:#f9fafb;}.sbtn.a-dropped .sl{color:#6b7280;}
+.divider{height:1px;background:var(--gm);margin:24px 0;}
+.tsec{margin-bottom:22px;}
+.tlbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:10px;}
+.tlist{border:1.5px solid var(--gm);background:var(--w);}
+.titem{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-bottom:1px solid var(--gm);}
+.titem:last-child{border-bottom:none;}
+.titem input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--k);flex-shrink:0;margin-top:2px;}
+.tname{font-size:13px;font-weight:500;color:var(--k);line-height:1.4;}
+.tname.done{text-decoration:line-through;color:var(--g);}
+.tmeta{font-size:11px;color:var(--g);margin-top:3px;}
+.rsec{background:var(--gl);border:1.5px solid var(--gm);padding:16px 18px;margin-bottom:22px;}
+.rt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:10px;}
+.ai{font-size:12px;color:#555;margin-bottom:14px;line-height:1.5;padding:10px 12px;background:#fff;border-left:3px solid var(--y);}
+.ai strong{color:var(--k);}
+.rl{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ri{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;}
+.ri input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--k);flex-shrink:0;}
+.rn{font-weight:500;}
+.re{color:var(--g);font-size:11px;margin-left:4px;}
+.rx{border-top:1px solid var(--gm);padding-top:12px;margin-top:4px;}
+.rx label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:6px;}
+.bsub{width:100%;padding:16px;background:var(--y);color:var(--k);border:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;position:relative;}
+.bsub:hover{background:#e6b800;}
+.bsub:disabled{opacity:.5;cursor:not-allowed;}
+.spin-el{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:var(--k);border-radius:50%;animation:spin .6s linear infinite;position:absolute;right:20px;top:50%;transform:translateY(-50%);}
+.bsub.loading .spin-el{display:block;}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
+.errmsg{display:none;background:#fef2f2;border:1px solid #fecaca;padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:18px;}
+.errmsg.show{display:block;}
+.hint{font-size:12px;color:var(--g);padding:6px 0;}
+.success{display:none;padding:48px 36px;text-align:center;}
+.success.show{display:block;}
+.fa.hidden{display:none;}
+.sicon{width:64px;height:64px;background:var(--y);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px;font-weight:700;}
+.success h2{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px;}
+.success p{font-size:13px;color:var(--g);line-height:1.6;margin-bottom:24px;}
+.bagain{padding:11px 24px;border:1.5px solid var(--k);background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+.bagain:hover{background:var(--k);color:var(--w);}
+.footer{text-align:center;padding:20px;font-size:10px;color:var(--g);letter-spacing:.08em;text-transform:uppercase;}
+@media(max-width:560px){.card-header,.card-body{padding-left:20px;padding-right:20px;}.pgrid,.sgrid3,.sgrid4{grid-template-columns:repeat(2,1fr);}.topbar{padding:0 16px;}.main{padding-top:24px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-box">BF</div>
+    <span class="topbar-name">Brooklyn Fitboxing</span>
+  </div>
+  <div class="topbar-label">Seguimiento OKRs</div>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-header">
+      <h1>Actualiza tu OKR</h1>
+      <p>Informa del estado actual de tu objetivo.</p>
+    </div>
+    <div class="card-body">
+      <div class="errmsg" id="errmsg"></div>
+      <div class="fa" id="fa">
+
+        <!-- Trimestre -->
+        <div class="field">
+          <label>Trimestre</label>
+          <div class="pgrid" id="pgrid">
+            <button class="pbtn" data-action="period" data-gid="1203122935275327" data-name="1T 2026">1T 2026</button>
+            <button class="pbtn active" data-action="period" data-gid="1203122935275353" data-name="2T 2026">2T 2026</button>
+            <button class="pbtn" data-action="period" data-gid="1203122935276440" data-name="3T 2026">3T 2026</button>
+            <button class="pbtn" data-action="period" data-gid="1203122935277490" data-name="4T 2026">4T 2026</button>
+          </div>
+        </div>
+
+        <!-- Tu nombre -->
+        <div class="field">
+          <label>Tu nombre</label>
+          <input type="text" id="f-name" placeholder="Escribe tu nombre...">
+        </div>
+
+        <!-- OKR personal -->
+        <div class="field">
+          <label>Tu OKR personal</label>
+          <div class="hint" id="okr-hint">Cargando OKRs...</div>
+          <select id="f-goal" disabled>
+            <option value="">— Selecciona tu OKR —</option>
+          </select>
+        </div>
+
+        <!-- Estado -->
+        <div style="margin-bottom:22px;">
+          <span class="slbl">Estado actual</span>
+          <div class="sglbl">Abierto</div>
+          <div class="sgrid3" id="sgrid-open">
+            <button class="sbtn" data-action="status" data-status="green" id="sbtn-green">
+              <div class="dot" style="background:#16a34a"></div><span class="sl">En curso</span>
+            </button>
+            <button class="sbtn" data-action="status" data-status="yellow" id="sbtn-yellow">
+              <div class="dot" style="background:#b45309"></div><span class="sl">En riesgo</span>
+            </button>
+            <button class="sbtn" data-action="status" data-status="red" id="sbtn-red">
+              <div class="dot" style="background:#dc2626"></div><span class="sl">Con retraso</span>
+            </button>
+          </div>
+          <div class="sglbl">Cierre de trimestre</div>
+          <div class="sgrid4" id="sgrid-close">
+            <button class="sbtn" data-action="status" data-status="achieved" id="sbtn-achieved">
+              <div class="dot" style="background:#059669"></div><span class="sl">Logrado</span>
+            </button>
+            <button class="sbtn" data-action="status" data-status="partial" id="sbtn-partial">
+              <div class="dot" style="background:#d97706"></div><span class="sl">Parcial</span>
+            </button>
+            <button class="sbtn" data-action="status" data-status="missed" id="sbtn-missed">
+              <div class="dot" style="background:#dc2626"></div><span class="sl">No cumplido</span>
+            </button>
+            <button class="sbtn" data-action="status" data-status="dropped" id="sbtn-dropped">
+              <div class="dot" style="background:#6b7280"></div><span class="sl">Descartado</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Tareas -->
+        <div id="tasks-section" style="display:none;margin-bottom:22px;">
+          <div class="tlbl">Tareas conectadas</div>
+          <div class="hint" id="tasks-hint" style="display:none;"></div>
+          <div id="tasks-list" class="tlist" style="display:none;"></div>
+        </div>
+
+        <!-- Comentario -->
+        <div class="field">
+          <label>Comentario del objetivo</label>
+          <textarea id="f-comment" placeholder="Describe brevemente los avances, bloqueos o próximos pasos..."></textarea>
+        </div>
+
+        <!-- Notificación -->
+        <div class="rsec">
+          <div class="rt">Notificación</div>
+          <div class="ai" id="ai-info">Selecciona tu OKR para ver los destinatarios automáticos.</div>
+          <div class="rt">Notificar también a</div>
+          <div class="rl">
+            <label class="ri"><input type="checkbox" class="xr" id="xr-ps"><span class="rn">Pablo Sacristán</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-pn"><span class="rn">Pablo Nebrera</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-mb"><span class="rn">Maria Blanco</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-cf"><span class="rn">Carlos Fernández</span></label>
+            <label class="ri"><input type="checkbox" class="xr" id="xr-ex" checked><span class="rn">Elevate Xcellence</span></label>
+          </div>
+          <div class="rx">
+            <label>Añadir otro email (opcional)</label>
+            <input type="email" id="extra-email" placeholder="otro@brooklynfitboxing.com">
+          </div>
+        </div>
+
+        <button class="bsub" id="btn-submit" data-action="submit">
+          Enviar actualización
+          <span class="spin-el"></span>
+        </button>
+      </div>
+
+      <div class="success" id="success-screen">
+        <div class="sicon">&#10003;</div>
+        <h2>Actualización enviada</h2>
+        <p id="success-msg"></p>
+        <button class="bagain" data-action="reset">Nueva actualización</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Brooklyn Fitboxing International · OKR Manager</div>
+
+<script>
+(function(){
+  var N8N        = 'https://workflows.brooklynfitzone.com/webhook/okr-update';
+  var N8N_GOALS  = 'https://workflows.brooklynfitzone.com/webhook/okr-personales';
+  var N8N_TASKS  = 'https://workflows.brooklynfitzone.com/webhook/okr-tareas';
+  var N8N_DONE   = 'https://workflows.brooklynfitzone.com/webhook/okr-completar-tarea';
+
+  // Asignar emails via JS para evitar que Cloudflare los reescriba en el HTML
+  var d = 'brooklynfitboxing.com';
+  var EMAILS = {
+    'xr-ps': 'pablo.sacristan@' + d,
+    'xr-pn': 'pablo@' + d,
+    'xr-mb': 'maria@' + d,
+    'xr-cf': 'carlos.fernandez@' + d,
+    'xr-ex': 'elevate.xcellence@' + d
+  };
+  Object.keys(EMAILS).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.value = EMAILS[id];
+  });
+
+  var state = {
+    periodGid:  '1203122935275353',
+    periodName: '2T 2026',
+    status:     '',
+    goalGid:    '',
+    goalName:   '',
+    goalOwner:  ''
+  };
+
+  var STATUS_MAP = {
+    green:    {cls:'a-green',    label:'En curso ✅'},
+    yellow:   {cls:'a-yellow',   label:'En riesgo ⚠️'},
+    red:      {cls:'a-red',      label:'Con retraso 🔴'},
+    achieved: {cls:'a-achieved', label:'Logrado 🏆'},
+    partial:  {cls:'a-partial',  label:'Parcial 🟡'},
+    missed:   {cls:'a-missed',   label:'No cumplido ❌'},
+    dropped:  {cls:'a-dropped',  label:'Descartado ⬜'}
+  };
+
+  var ALL_S = Object.keys(STATUS_MAP);
+
+  var AREA_RE = /^(OKR|OKT|BFI[\s_]OKR)[\s_]*(1T|2T|3T|4T|Q1|Q2|Q3|Q4)[\s_]*\d{4}/i;
+
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  // ── Event delegation (un solo listener) ───────────────────────────────────
+  document.addEventListener('click', function(e){
+    var el = e.target;
+    // Buscar el elemento con data-action más cercano
+    while(el && !el.dataset.action) el = el.parentElement;
+    if(!el) return;
+    var action = el.dataset.action;
+    if(action === 'period')  { e.preventDefault(); doPeriod(el); }
+    if(action === 'status')  { e.preventDefault(); doStatus(el); }
+    if(action === 'submit')  { e.preventDefault(); doSubmit(); }
+    if(action === 'reset')   { e.preventDefault(); doReset(); }
+    if(action === 'task-cb') { doTaskToggle(el); }
+    if(action === 'task-comment') { e.preventDefault(); doTaskComment(el); }
+  });
+
+  document.getElementById('f-goal').addEventListener('change', function(){
+    var val = this.value;
+    var info = document.getElementById('ai-info');
+    var tsec = document.getElementById('tasks-section');
+    if(!val){ state.goalGid=''; state.goalName=''; state.goalOwner=''; info.textContent='Selecciona tu OKR para ver los destinatarios automáticos.'; tsec.style.display='none'; return; }
+    var p = val.split('|');
+    state.goalGid   = p[0];
+    state.goalName  = p[1];
+    state.goalOwner = p[2]||'';
+    if(state.goalOwner){
+      info.innerHTML = '<strong>Recibirán automáticamente:</strong> '+esc(state.goalOwner)+' y los seguidores del goal en Asana.';
+      document.querySelectorAll('.xr').forEach(function(cb){ if(cb.value===state.goalOwner) cb.checked=true; });
+    } else {
+      info.textContent = 'Los seguidores del goal en Asana recibirán la notificación.';
+    }
+    loadTasks(state.goalGid);
+  });
+
+  // ── Period ─────────────────────────────────────────────────────────────────
+  function doPeriod(btn){
+    state.periodGid  = btn.dataset.gid;
+    state.periodName = btn.dataset.name;
+    document.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    loadGoals(state.periodGid);
+  }
+
+  // ── Status ─────────────────────────────────────────────────────────────────
+  function doStatus(btn){
+    var s = btn.dataset.status;
+    state.status = s;
+    ALL_S.forEach(function(x){
+      var b = document.getElementById('sbtn-'+x);
+      if(b) b.className = 'sbtn' + (x===s ? ' '+STATUS_MAP[x].cls : '');
+    });
+  }
+
+  // ── Load goals ─────────────────────────────────────────────────────────────
+  function loadGoals(gid){
+    var sel   = document.getElementById('f-goal');
+    var hint  = document.getElementById('okr-hint');
+    sel.disabled = true;
+    sel.innerHTML = '<option value="">Cargando...</option>';
+    hint.textContent = 'Cargando OKRs del trimestre...';
+    hint.style.display = 'block';
+    state.goalGid=''; state.goalName=''; state.goalOwner='';
+    document.getElementById('tasks-section').style.display='none';
+    document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
+
+    fetch(N8N_GOALS+'?time_period_gid='+gid)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        hint.style.display='none';
+        var raw = Array.isArray(data) ? data : (data.goals||data.data||[]);
+        var goals = raw
+          .filter(function(g){ return g&&g.name&&!AREA_RE.test(g.name.trim()); })
+          .sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
+        if(!goals.length){
+          sel.innerHTML='<option value="">No hay OKRs para este trimestre</option>';
+          sel.disabled=false; return;
+        }
+        // Agrupar por equipo
+        var groups = {};
+        goals.forEach(function(g){
+          var team = (g.team_name || g.owner_name || 'Sin equipo').replace(/^BFI\s+/i,'');
+          if(!groups[team]) groups[team] = [];
+          groups[team].push(g);
+        });
+        var teamNames = Object.keys(groups).sort();
+        var html = '<option value="">— Selecciona tu OKR —</option>';
+        teamNames.forEach(function(team){
+          html += '<optgroup label="' + esc(team) + '">';
+          groups[team].forEach(function(g){
+            html += '<option value="'+esc(g.gid)+'|'+esc(g.name)+'|'+esc(g.owner_email||'')+'">'+esc(g.name)+'</option>';
+          });
+          html += '</optgroup>';
+        });
+        sel.innerHTML=html;
+        sel.disabled=false;
+      })
+      .catch(function(){
+        hint.textContent='No se pudieron cargar los OKRs.';
+        sel.innerHTML='<option value="">Error al cargar</option>';
+        sel.disabled=false;
+      });
+  }
+
+  // ── Load tasks ─────────────────────────────────────────────────────────────
+  function loadTasks(goalGid){
+    var tsec  = document.getElementById('tasks-section');
+    var hint  = document.getElementById('tasks-hint');
+    var list  = document.getElementById('tasks-list');
+    tsec.style.display='block';
+    hint.style.display='block';
+    hint.textContent='Cargando tareas...';
+    list.style.display='none';
+    list.innerHTML='';
+
+    fetch(N8N_TASKS+'?goal_gid='+goalGid)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        hint.style.display='none';
+        var tasks = Array.isArray(data) ? data : (data.tasks || data.data || []);
+        if(!tasks||!tasks.length){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; return; }
+        list.style.display='block';
+        var html='';
+        tasks.forEach(function(t){
+          var chk=t.completed?'checked':'';
+          var meta=[];
+          if(t.assignee) meta.push(esc(t.assignee));
+          if(t.due_on)   meta.push(t.due_on);
+          html+='<div class="titem" id="ti-'+t.gid+'">';
+          html+='<input type="checkbox" '+chk+' data-action="task-cb" data-gid="'+t.gid+'">';
+          html+='<div style="flex:1;"><div class="tname'+(t.completed?' done':'')+'" id="tn-'+t.gid+'">'+esc(t.name)+'</div>';
+          if(meta.length) html+='<div class="tmeta">'+meta.join(' · ')+'</div>';
+          html+='<div style="margin-top:8px;display:flex;gap:6px;">';
+          html+='<textarea id="tc-'+t.gid+'" placeholder="Añadir comentario..." style="flex:1;padding:6px 8px;font-family:inherit;font-size:12px;border:1px solid #e0dfd8;resize:none;height:30px;outline:none;transition:height .15s;"></textarea>';
+          html+='<button data-action="task-comment" data-gid="'+t.gid+'" style="padding:6px 10px;background:#000;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;height:30px;">Guardar</button>';
+          html+='</div>';
+          html+='</div></div>';
+        });
+        list.innerHTML=html;
+      })
+      .catch(function(){
+        hint.textContent='No se pudieron cargar las tareas.';
+        hint.style.display='block';
+      });
+  }
+
+  // ── Task toggle ────────────────────────────────────────────────────────────
+  function doTaskToggle(cb){
+    var gid  = cb.dataset.gid;
+    var done = cb.checked;
+    var nameEl = document.getElementById('tn-'+gid);
+    if(nameEl) nameEl.className='tname'+(done?' done':'');
+    fetch(N8N_DONE,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({task_gid:gid,completed:done})
+    }).catch(function(){
+      cb.checked=!done;
+      if(nameEl) nameEl.className='tname'+(!done?' done':'');
+    });
+  }
+
+  // ── Task comment ───────────────────────────────────────────────────────────
+  function doTaskComment(btn){
+    var gid  = btn.dataset.gid;
+    var ta   = document.getElementById('tc-'+gid);
+    var text = ta ? ta.value.trim() : '';
+    if(!text) return;
+    var userName = (document.getElementById('f-name').value||'').trim() || 'Xcellence';
+    btn.textContent='...'; btn.disabled=true;
+    fetch(N8N_DONE.replace('okr-completar-tarea','okr-comentar-tarea'),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({task_gid:gid,comment:text,user_name:userName})
+    }).then(function(){
+      ta.value=''; ta.style.height='30px';
+      btn.textContent='✓';
+      setTimeout(function(){ btn.textContent='Guardar'; btn.disabled=false; },2000);
+    }).catch(function(){
+      btn.textContent='Guardar'; btn.disabled=false;
+    });
+  }
+
+  // ── Submit ─────────────────────────────────────────────────────────────────
+  function doSubmit(){
+    var e=document.getElementById('errmsg');
+    e.className='errmsg';
+    if(!state.goalGid) { e.textContent='Selecciona tu OKR.';           e.className='errmsg show'; return; }
+    if(!state.status)  { e.textContent='Selecciona el estado actual.'; e.className='errmsg show'; return; }
+
+    var userName = (document.getElementById('f-name').value||'').trim();
+    if(!userName) { e.textContent='Escribe tu nombre.'; e.className='errmsg show'; return; }
+    var comment    = document.getElementById('f-comment').value.trim();
+    var extraEmail = document.getElementById('extra-email').value.trim();
+    var extra=[];
+    document.querySelectorAll('.xr:checked').forEach(function(cb){ extra.push(cb.value); });
+    if(extraEmail&&extraEmail.indexOf('@')>-1) extra.push(extraEmail);
+
+    var today=new Date();
+    var months=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    var dateStr=today.getDate()+' '+months[today.getMonth()]+' '+today.getFullYear();
+
+    var payload={
+      goal_gid:    state.goalGid,
+      goal_name:   state.goalName,
+      goal_owner:  state.goalOwner,
+      period:      state.periodName,
+      status:      state.status,
+      comment:     comment,
+      extra_recipients: extra,
+      date:        dateStr,
+      timestamp:   new Date().toISOString(),
+      user_name:   userName || state.goalName,
+      user_email:  state.goalOwner
+    };
+
+    var btn=document.getElementById('btn-submit');
+    btn.disabled=true; btn.classList.add('loading');
+    btn.firstChild.nodeValue='Enviando... ';
+
+    fetch(N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        var sl=STATUS_MAP[state.status]?STATUS_MAP[state.status].label:state.status;
+        document.getElementById('success-msg').textContent='"'+state.goalName+'" marcado como '+sl+'.';
+        document.getElementById('fa').classList.add('hidden');
+        document.getElementById('success-screen').classList.add('show');
+      })
+      .catch(function(){
+        btn.disabled=false; btn.classList.remove('loading');
+        btn.firstChild.nodeValue='Enviar actualización ';
+        e.textContent='No se pudo conectar. Contacta con elevate.xcellence@brooklynfitboxing.com';
+        e.className='errmsg show';
+      });
+  }
+
+  // ── Reset ──────────────────────────────────────────────────────────────────
+  function doReset(){
+    state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner='';
+    document.getElementById('f-name').value='';
+    document.getElementById('f-comment').value='';
+    document.getElementById('extra-email').value='';
+    document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
+    document.getElementById('tasks-section').style.display='none';
+    document.getElementById('tasks-list').innerHTML='';
+    ALL_S.forEach(function(x){ var b=document.getElementById('sbtn-'+x); if(b) b.className='sbtn'; });
+    document.querySelectorAll('.xr').forEach(function(cb){ cb.checked = cb.id === 'xr-ex'; });
+    var btn=document.getElementById('btn-submit');
+    btn.disabled=false; btn.classList.remove('loading');
+    btn.firstChild.nodeValue='Enviar actualización ';
+    document.getElementById('fa').classList.remove('hidden');
+etElementById('success-screen').classList.remove('show');
+    loadGoals(state.periodGid);
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  loadGoals(state.periodGid);
+
+})();
+</script>
+
+</body>
+</html>
