@@ -349,7 +349,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           if(areaMatch) {
             team = areaMatch[1].trim() || 'Área';
           } else {
-            team = g.team_name || g.owner_name || 'Personal';
+            team = (g.team && g.team.name) || g.team_name || g.owner_name || 'Sin equipo';
           }
           team = team.replace(/^BFI\s+/i,'');
           if(!groups[team]) groups[team] = [];
