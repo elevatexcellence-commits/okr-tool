@@ -732,37 +732,45 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
   }
 
-  // ── TASKS — GET a n8n ────────────────────────────────────────────────────
+  // ── TASKS ────────────────────────────────────────────────────────────────
   function loadTasks(goalGid){
     var tsec=document.getElementById('tasks-section');
     var hint=document.getElementById('tasks-hint');
     var list=document.getElementById('tasks-list');
-
     var staticTasks=TASKS[goalGid];
-    if(staticTasks){
+
+    // Si hay datos estáticos, mostrarlos y no llamar a n8n
+    if(staticTasks && staticTasks.length){
       tsec.style.display='block';
+      hint.style.display='none';
       renderTaskList(staticTasks, tsec, hint, list);
-    } else {
-      tsec.style.display='block';
-      hint.textContent='Cargando tareas...';
-      hint.style.display='block';
-      list.style.display='none';
-      list.innerHTML='';
+      return;
     }
 
-    var url = N8N_TASKS + '?goal_gid=' + goalGid + '&project_gid=' + (state.areaProject||'');
+    // Solo llamar a n8n si no hay datos estáticos
+    tsec.style.display='block';
+    hint.textContent='Cargando tareas...';
+    hint.style.display='block';
+    list.style.display='none';
+    list.innerHTML='';
+
+    var url=N8N_TASKS+'?goal_gid='+goalGid+'&project_gid='+(state.areaProject||'');
     fetch(url)
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
         var tasks=Array.isArray(data)?data:(data.tasks||data.subtasks||data.data||[]);
         if(!tasks||!tasks.length){
-          if(!staticTasks){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; list.style.display='none'; }
+          hint.textContent='Sin tareas conectadas para este OKR.';
+          hint.style.display='block';
+          list.style.display='none';
           return;
         }
         renderTaskList(tasks, tsec, hint, list);
       })
       .catch(function(){
-        if(!staticTasks){ hint.textContent='Sin tareas para este OKR.'; hint.style.display='block'; list.style.display='none'; }
+        hint.textContent='Sin tareas para este OKR.';
+        hint.style.display='block';
+        list.style.display='none';
       });
   }
 
