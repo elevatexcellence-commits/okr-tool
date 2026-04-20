@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Actualización OKR · Brooklyn Fitboxing</title>
 <style>
-:root{--y:#FFCC00;--k:#000;--g:#9a999e;--gl:#f2f2f0;--gm:#e0dfd8;--w:#fff;--green:#16a34a;--gbg:#f0fdf4;--red:#dc2626;--rbg:#fef2f2;--amber:#b45309;--abg:#fffbeb;}
+:root{--y:#FFCC00;--k:#000;--g:#9a999e;--gl:#f2f2f0;--gm:#e0dfd8;--w:#fff;--green:#16a34a;--red:#dc2626;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl);color:var(--k);min-height:100vh;display:flex;flex-direction:column;}
 .topbar{background:var(--k);padding:0 28px;height:56px;display:flex;align-items:center;flex-shrink:0;}
 .topbar-brand{display:flex;align-items:center;gap:12px;padding-right:20px;border-right:1px solid rgba(255,255,255,0.12);}
-.topbar-box{display:none;}
-.topbar-name{font-size:15px;font-weight:800;color:#fff;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;}
-.topbar-label{padding-left:20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;}
+.topbar-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:.04em;text-transform:uppercase;}
+.topbar-label{padding-left:20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:.12em;text-transform:uppercase;}
 .main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:48px 20px 60px;}
 .card{background:var(--w);width:100%;max-width:580px;border-top:4px solid var(--y);}
 .card-header{padding:32px 36px 24px;border-bottom:1px solid var(--gm);}
@@ -21,15 +20,27 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 .card-body{padding:28px 36px 36px;}
 .field{margin-bottom:22px;}
 .field label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:8px;}
-.field select,.field textarea,.field input[type=email]{width:100%;padding:11px 14px;border:1.5px solid var(--gm);background:var(--w);color:var(--k);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;outline:none;transition:border-color .15s;appearance:none;position:relative;z-index:1;}
+.field select,.field textarea,.field input{width:100%;padding:11px 14px;border:1.5px solid var(--gm);background:var(--w);color:var(--k);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;outline:none;transition:border-color .15s;appearance:none;}
 .field select:focus,.field textarea:focus,.field input:focus{border-color:var(--k);}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239a999e' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
 .field select:disabled{opacity:.5;cursor:not-allowed;}
 .field textarea{resize:vertical;min-height:88px;line-height:1.6;}
+
+/* PERIOD */
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
 .pbtn{padding:10px 8px;border:1.5px solid var(--gm);background:var(--w);cursor:pointer;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;text-align:center;transition:all .12s;}
 .pbtn:hover{border-color:var(--k);}
 .pbtn.active{border-color:var(--k);background:var(--k);color:var(--w);}
+
+/* AREA GRID */
+.area-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.abtn{padding:10px 14px;border:1.5px solid var(--gm);background:var(--w);cursor:pointer;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;text-align:left;transition:all .12s;display:flex;align-items:center;gap:8px;}
+.abtn:hover{border-color:var(--k);}
+.abtn.active{border-color:var(--k);background:var(--k);color:var(--w);}
+.adot{width:7px;height:7px;border-radius:50%;background:var(--gm);flex-shrink:0;}
+.abtn.active .adot{background:var(--y);}
+
+/* STATUS */
 .slbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:8px;}
 .sglbl{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--g);margin-bottom:6px;margin-top:10px;}
 .sglbl:first-of-type{margin-top:0;}
@@ -46,16 +57,20 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 .sbtn.a-partial{border-color:#d97706;background:#fffbeb;}.sbtn.a-partial .sl{color:#d97706;}
 .sbtn.a-missed{border-color:#dc2626;background:#fef2f2;}.sbtn.a-missed .sl{color:#dc2626;}
 .sbtn.a-dropped{border-color:#6b7280;background:#f9fafb;}.sbtn.a-dropped .sl{color:#6b7280;}
+
 .divider{height:1px;background:var(--gm);margin:24px 0;}
-.tsec{margin-bottom:22px;}
+
+/* TASKS */
 .tlbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:10px;}
 .tlist{border:1.5px solid var(--gm);background:var(--w);}
 .titem{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-bottom:1px solid var(--gm);}
 .titem:last-child{border-bottom:none;}
 .titem input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--k);flex-shrink:0;margin-top:2px;}
-.tname{font-size:13px;font-weight:500;color:var(--k);line-height:1.4;}
+.tname{font-size:13px;font-weight:500;line-height:1.4;}
 .tname.done{text-decoration:line-through;color:var(--g);}
 .tmeta{font-size:11px;color:var(--g);margin-top:3px;}
+
+/* NOTIFICATIONS */
 .rsec{background:var(--gl);border:1.5px solid var(--gm);padding:16px 18px;margin-bottom:22px;}
 .rt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:10px;}
 .ai{font-size:12px;color:#555;margin-bottom:14px;line-height:1.5;padding:10px 12px;background:#fff;border-left:3px solid var(--y);}
@@ -64,9 +79,10 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 .ri{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;}
 .ri input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--k);flex-shrink:0;}
 .rn{font-weight:500;}
-.re{color:var(--g);font-size:11px;margin-left:4px;}
 .rx{border-top:1px solid var(--gm);padding-top:12px;margin-top:4px;}
 .rx label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:6px;}
+
+/* SUBMIT */
 .bsub{width:100%;padding:16px;background:var(--y);color:var(--k);border:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;position:relative;}
 .bsub:hover{background:#e6b800;}
 .bsub:disabled{opacity:.5;cursor:not-allowed;}
@@ -76,6 +92,8 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 .errmsg{display:none;background:#fef2f2;border:1px solid #fecaca;padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:18px;}
 .errmsg.show{display:block;}
 .hint{font-size:12px;color:var(--g);padding:6px 0;}
+
+/* SUCCESS */
 .success{display:none;padding:48px 36px;text-align:center;}
 .success.show{display:block;}
 .fa.hidden{display:none;}
@@ -85,7 +103,12 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 .bagain{padding:11px 24px;border:1.5px solid var(--k);background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
 .bagain:hover{background:var(--k);color:var(--w);}
 .footer{text-align:center;padding:20px;font-size:10px;color:var(--g);letter-spacing:.08em;text-transform:uppercase;}
-@media(max-width:560px){.card-header,.card-body{padding-left:20px;padding-right:20px;}.pgrid,.sgrid3,.sgrid4{grid-template-columns:repeat(2,1fr);}.topbar{padding:0 16px;}.main{padding-top:24px;}}
+@media(max-width:560px){
+  .card-header,.card-body{padding-left:20px;padding-right:20px;}
+  .pgrid,.sgrid3,.sgrid4,.area-grid{grid-template-columns:repeat(2,1fr);}
+  .topbar{padding:0 16px;}
+  .main{padding-top:24px;}
+}
 </style>
 </head>
 <body>
@@ -108,10 +131,10 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       <div class="errmsg" id="errmsg"></div>
       <div class="fa" id="fa">
 
-        <!-- Trimestre -->
+        <!-- TRIMESTRE -->
         <div class="field">
           <label>Trimestre</label>
-          <div class="pgrid" id="pgrid">
+          <div class="pgrid">
             <button class="pbtn" data-action="period" data-gid="1203122935275327" data-name="1T 2026">1T 2026</button>
             <button class="pbtn active" data-action="period" data-gid="1203122935275353" data-name="2T 2026">2T 2026</button>
             <button class="pbtn" data-action="period" data-gid="1203122935276440" data-name="3T 2026">3T 2026</button>
@@ -119,26 +142,32 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           </div>
         </div>
 
-        <!-- Tu nombre -->
+        <!-- TU NOMBRE -->
         <div class="field">
           <label>Tu nombre</label>
           <input type="text" id="f-name" placeholder="Escribe tu nombre...">
         </div>
 
-        <!-- OKR personal -->
+        <!-- ÁREA -->
+        <div class="field">
+          <label>Área</label>
+          <div class="area-grid" id="area-grid"></div>
+        </div>
+
+        <!-- OKR INDIVIDUAL -->
         <div class="field">
           <label>OKR a actualizar</label>
-          <div class="hint" id="okr-hint">Cargando OKRs...</div>
+          <div class="hint" id="okr-hint" style="display:none;color:#9a999e;">Selecciona primero tu área.</div>
           <select id="f-goal" disabled>
             <option value="">— Selecciona tu OKR —</option>
           </select>
         </div>
 
-        <!-- Estado -->
+        <!-- ESTADO -->
         <div style="margin-bottom:22px;">
           <span class="slbl">Estado actual</span>
           <div class="sglbl">Abierto</div>
-          <div class="sgrid3" id="sgrid-open">
+          <div class="sgrid3">
             <button class="sbtn" data-action="status" data-status="green" id="sbtn-green">
               <div class="dot" style="background:#16a34a"></div><span class="sl">En curso</span>
             </button>
@@ -150,7 +179,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
             </button>
           </div>
           <div class="sglbl">Cierre de trimestre</div>
-          <div class="sgrid4" id="sgrid-close">
+          <div class="sgrid4">
             <button class="sbtn" data-action="status" data-status="achieved" id="sbtn-achieved">
               <div class="dot" style="background:#059669"></div><span class="sl">Logrado</span>
             </button>
@@ -168,20 +197,20 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 
         <div class="divider"></div>
 
-        <!-- Tareas -->
+        <!-- TAREAS -->
         <div id="tasks-section" style="display:none;margin-bottom:22px;">
           <div class="tlbl">Tareas conectadas</div>
           <div class="hint" id="tasks-hint" style="display:none;"></div>
           <div id="tasks-list" class="tlist" style="display:none;"></div>
         </div>
 
-        <!-- Comentario -->
+        <!-- COMENTARIO -->
         <div class="field">
           <label>Comentario del objetivo</label>
           <textarea id="f-comment" placeholder="Describe brevemente los avances, bloqueos o próximos pasos..."></textarea>
         </div>
 
-        <!-- Notificación -->
+        <!-- NOTIFICACIÓN -->
         <div class="rsec">
           <div class="rt">Notificación</div>
           <div class="ai" id="ai-info">Selecciona tu OKR para ver los destinatarios automáticos.</div>
@@ -225,323 +254,386 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 
 <script>
 (function(){
+  // ── WEBHOOKS ────────────────────────────────────────────────────────────────
   var N8N        = 'https://workflows.brooklynfitzone.com/webhook/okr-update';
-  var N8N_GOALS  = 'https://workflows.brooklynfitzone.com/webhook/okr-personales';
   var N8N_TASKS  = 'https://workflows.brooklynfitzone.com/webhook/okr-tareas';
   var N8N_DONE   = 'https://workflows.brooklynfitzone.com/webhook/okr-completar-tarea';
+  var N8N_COMMENT= 'https://workflows.brooklynfitzone.com/webhook/okr-comentar-tarea';
 
-  // Asignar emails via JS para evitar que Cloudflare los reescriba en el HTML
+  // ── EMAILS ──────────────────────────────────────────────────────────────────
   var d = 'brooklynfitboxing.com';
   var EMAILS = {
-    'xr-ps': 'pablo.sacristan@' + d,
-    'xr-pn': 'pablo@' + d,
-    'xr-mb': 'maria@' + d,
-    'xr-cf': 'carlos.fernandez@' + d,
-    'xr-ex': 'elevate.xcellence@' + d,
-    'xr-ad': 'adolfo@' + d,
-    'xr-cp': 'cristina.pujol@' + d,
-    'xr-jb': 'jesus.blanco@' + d,
-    'xr-cc': 'cristina.calleja@' + d,
-    'xr-jm': 'julia.miralles@' + d,
-    'xr-ca': 'carlos.alonso@' + d
+    'xr-ps':'pablo.sacristan@'+d,'xr-pn':'pablo@'+d,'xr-mb':'maria@'+d,
+    'xr-cf':'carlos.fernandez@'+d,'xr-ex':'elevate.xcellence@'+d,'xr-ad':'adolfo@'+d,
+    'xr-cp':'cristina.pujol@'+d,'xr-jb':'jesus.blanco@'+d,'xr-cc':'cristina.calleja@'+d,
+    'xr-jm':'julia.miralles@'+d,'xr-ca':'carlos.alonso@'+d
   };
   Object.keys(EMAILS).forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.value = EMAILS[id];
+    var el=document.getElementById(id); if(el) el.value=EMAILS[id];
   });
 
-  var state = {
-    periodGid:  '1203122935275353',
-    periodName: '2T 2026',
-    status:     '',
-    goalGid:    '',
-    goalName:   '',
-    goalOwner:  ''
+  // ── AREAS por período ────────────────────────────────────────────────────────
+  var AREAS = {
+    '1203122935275327': [
+      {gid:'1212556603278689', name:'Elevate Operations'},
+      {gid:'1212678989896206', name:'Academy'},
+      {gid:'1212851079304871', name:'Legal'},
+      {gid:'1212681019974361', name:'Marketing'},
+      {gid:'1212545601219989', name:'People'},
+      {gid:'1212816087341315', name:'Workouts'}
+    ],
+    '1203122935275353': [
+      {gid:'1213830999493956', name:'Elevate Operations'},
+      {gid:'1213831324226859', name:'Academy'},
+      {gid:'1213831324226855', name:'Legal'},
+      {gid:'1213831324226863', name:'Marketing'},
+      {gid:'1213830999493941', name:'People'},
+      {gid:'1213831324226866', name:'Financiero'},
+      {gid:'1213830999493947', name:'Engagement'},
+      {gid:'1213830999493945', name:'Power Up'},
+      {gid:'1213830999493950', name:'Business Dev'},
+      {gid:'1214058200349927', name:'Workouts'}
+    ],
+    '1203122935276440': [],
+    '1203122935277490': []
   };
 
+  // ── OKRs individuales por área GID ───────────────────────────────────────────
+  var GOALS = {
+    // Q1 · ELEVATE OPERATIONS
+    '1212556603278689': [
+      {gid:'1212696402802293',name:'Carlos Fernández OKR - Launch the Full Energy evaluation system',email:'carlos.fernandez@'+d},
+      {gid:'1212696396083776',name:'Martina Marano OKR - Scaling aggregators while staying within budget',email:'carlos.fernandez@'+d},
+      {gid:'1212696396083765',name:'Nacho Pinedo OKR - Launch the AI Evaluation FES',email:'carlos.fernandez@'+d},
+      {gid:'1212744713197841',name:'Adrián Bravo OKR - Automate MiniPC Monitoring and Reporting Workflows',email:'saray.hermoso@'+d},
+      {gid:'1212744713197818',name:'Luca Morsicato OKR - Analyze and improve the aggregator functionality service',email:'saray.hermoso@'+d},
+      {gid:'1212744713197791',name:'Luiz Morete OKR - Streamline communication for flyer shipments',email:'saray.hermoso@'+d},
+      {gid:'1212744713197769',name:'Carlos de la Iglesia OKR - Implement a Zendesk weekly reporting system',email:'saray.hermoso@'+d},
+      {gid:'1212708945443289',name:'Alejandro Gómez OKR - Establish an ongoing test cycle for the App and Server',email:'saray.hermoso@'+d},
+      {gid:'1212744593192041',name:'Saray Hermoso OKR - Launch 2 department automations powered by AI',email:'saray.hermoso@'+d},
+      {gid:'1212546340109270',name:'Pablo Sacristan OKR - Establish P&L Management in all Organization',email:'pablo.sacristan@'+d},
+      {gid:'1212688098845405',name:'Teresa Nieto OKR - Implement the workforce management tool across countries',email:'pablo.sacristan@'+d},
+      {gid:'1212742783892632',name:'Luis G LLorca OKR - BF Plug&Play - New design concept',email:'pablo.sacristan@'+d},
+      {gid:'1212742795581488',name:'Miguel Ortega OKR - Maintenance management of own centres in Italy',email:'pablo.sacristan@'+d},
+      {gid:'1212742795581491',name:'Andreina Delgado OKR - Reduce average time spent managing titles and licences',email:'pablo.sacristan@'+d},
+      {gid:'1212742795581494',name:'Wilmer Bueno OKR - Energy cost optimisation (Italy)',email:'pablo.sacristan@'+d},
+      {gid:'1212898035948453',name:'Laura Alises OKR - Ensuring that 100% of own clubs in Spain are FEX certified',email:'pablo.sacristan@'+d},
+      {gid:'1212678989896210',name:'Maria Blanco OKR - Define and align the International Operations Strategy 2026–2027',email:'maria@'+d}
+    ],
+    // Q1 · ACADEMY
+    '1212678989896206': [
+      {gid:'1212724667993059',name:'Alicia Polo OKR - Launch the new training path for CM',email:'maria@'+d},
+      {gid:'1212724671605445',name:'Nico Ramo OKR - Launch of the new training Path 2026 for FL',email:'maria@'+d},
+      {gid:'1212707980990776',name:'Raquel Riera OKR - Start working with the new Training Path 2026 in international',email:'maria@'+d},
+      {gid:'1212707980990752',name:'Patri Aldeamil OKR - Ensure the training of Affiliate program to the network',email:'maria@'+d},
+      {gid:'1213227524781322',name:'Guillermo Vismans OKR - Launch of the new Welcome Training in Virtuox',email:'maria@'+d}
+    ],
+    // Q1 · LEGAL
+    '1212851079304871': [
+      {gid:'1212861278246700',name:'Antonella Marco OKR: Create a unified structure for Legal Drive',email:'cristina.calleja@'+d},
+      {gid:'1212851079304874',name:'Cristina Calleja OKR: Optimize and consolidate process in Asana for Franchise Manager interventions',email:'cristina.calleja@'+d}
+    ],
+    // Q1 · MARKETING
+    '1212681019974361': [
+      {gid:'1212594895558263',name:'Cristina Pujol OKR - Launch of the first customer survey from Opinat',email:'cristina.pujol@'+d},
+      {gid:'1212594895558285',name:'Adrián Arranz OKR - Achieve at least three notable appearances for brand awareness',email:'cristina.pujol@'+d},
+      {gid:'1212594895558308',name:'Sara Miralles OKR - Fit4Life program signed and presented to the network',email:'cristina.pujol@'+d},
+      {gid:'1212594895558346',name:'Marina Díaz OKR - Content production for Vita ready for use',email:'cristina.pujol@'+d},
+      {gid:'1212594895558363',name:'Kelly Ramírez OKR - Redesign of emails in Journeys',email:'cristina.pujol@'+d}
+    ],
+    // Q1 · PEOPLE
+    '1212545601219989': [
+      {gid:'1212545600011487',name:'Julia Miralles OKR - Design the second training program for Club Managers',email:'julia.miralles@'+d},
+      {gid:'1212545600011493',name:'Elena López OKR - Create an onboarding and welcome process structure',email:'julia.miralles@'+d}
+    ],
+    // Q1 · WORKOUTS
+    '1212816087341315': [
+      {gid:'1212816087341337',name:'Jesús Blanco OKR - Get 10000 feedbacks from Fitboxers on the workout',email:'jesus.blanco@'+d},
+      {gid:'1212816087341318',name:'Jesús Blanco OKR - Get 1000 feedbacks from Fitboxers on the workout',email:'jesus.blanco@'+d}
+    ],
+    // Q2 · ELEVATE OPERATIONS
+    '1213830999493956': [
+      {gid:'1213939067410334',name:'Carlos Fernández OKR - Build and activate the MD-based knowledge system for Brooklyn Brain',email:'carlos.fernandez@'+d},
+      {gid:'1213964203114586',name:'Denis Torres OKR - Stabilize quality evaluations and activate data-driven preventive actions',email:'carlos.fernandez@'+d},
+      {gid:'1214058669344864',name:'Adrián Bravo OKR - Update and Automate Core OS Infrastructure',email:'saray.hermoso@'+d},
+      {gid:'1214059513422349',name:'Alejandro Gómez OKR - Update and Automate Core OS Infrastructure',email:'saray.hermoso@'+d},
+      {gid:'1214057454860969',name:'Carlos de la Iglesia OKR - Automation of Zendesk monthly reports',email:'saray.hermoso@'+d},
+      {gid:'1214057454860957',name:'Luca Morsicato OKR - Create standard incident resolution procedures for Partoo and Adyen',email:'saray.hermoso@'+d},
+      {gid:'1214057454860953',name:'Saray Hermoso OKR - Launch Support bot',email:'saray.hermoso@'+d},
+      {gid:'1214061100243165',name:'Luiz Morete OKR - Create standard incident resolution procedures for marketing and aggregators',email:'saray.hermoso@'+d},
+      {gid:'1214055977420631',name:'María Blanco OKR - Increase to 5% the WO coming from affiliates',email:'maria@'+d}
+    ],
+    // Q2 · ACADEMY
+    '1213831324226859': [
+      {gid:'1214059490220581',name:'Patricia Aldeamil OKR - Obtain 5% WO coming from affiliates',email:'patricia.aldeamil@'+d},
+      {gid:'1214115503005261',name:'Nico Ramo OKR - Increase the % of WO originating from club members affiliates',email:'patricia.aldeamil@'+d},
+      {gid:'1214115503005270',name:'Alicia Polo OKR - Increase the % of WO originating from club members affiliates',email:'patricia.aldeamil@'+d},
+      {gid:'1214115503005279',name:'Raquel Riera OKR - Increase the % of WO originating from club members affiliates',email:'patricia.aldeamil@'+d},
+      {gid:'1214115503013262',name:'Guillermo Vismans OKR - Launch of the new Welcome Training in Virtuox',email:'patricia.aldeamil@'+d}
+    ],
+    // Q2 · LEGAL
+    '1213831324226855': [
+      {gid:'1214078156619837',name:'Cristina Calleja OKR: Transform the role of Franchise Manager from reactive to proactive',email:'cristina.calleja@'+d},
+      {gid:'1214078156619834',name:'Antonella Marco OKR: Full roll-out and consolidation of the Legal Drive structure',email:'cristina.calleja@'+d},
+      {gid:'1214078167143256',name:'Lucía Pérez OKR: Consolidate the implementation of the Right of Admission cartel model',email:'cristina.calleja@'+d}
+    ],
+    // Q2 · MARKETING
+    '1213831324226863': [
+      {gid:'1213831324226863',name:'(OKRs de Marketing Q2 — pendiente de asignar)',email:'adolfo@'+d}
+    ],
+    // Q2 · PEOPLE
+    '1213830999493941': [
+      {gid:'1213889773139317',name:'Elena López OKR - Strengthen the onboarding process',email:'julia.miralles@'+d}
+    ],
+    // Q2 · FINANCIERO
+    '1213831324226866': [
+      {gid:'1214016584990642',name:'Carlos Alonso OKR - Cost reduction in France',email:'carlos.alonso@'+d},
+      {gid:'1214016584990571',name:'Marta Rojo OKR - Treasury implementation',email:'carlos.alonso@'+d},
+      {gid:'1214016584990607',name:'Yuderky Maldonado OKR - Monthly tax review',email:'carlos.alonso@'+d},
+      {gid:'1214016583243714',name:'Andrés Pose OKR - Calculation of the global carbon footprint',email:'carlos.alonso@'+d}
+    ],
+    // Q2 · ENGAGEMENT
+    '1213830999493947': [
+      {gid:'1213830999493947',name:'(OKRs de Engagement Q2 — pendiente)',email:'cristina.pujol@'+d}
+    ],
+    // Q2 · POWER UP
+    '1213830999493945': [
+      {gid:'1213830999493945',name:'(OKRs de Power Up Q2 — pendiente)',email:'adolfo@'+d}
+    ],
+    // Q2 · BUSINESS DEVELOPMENT
+    '1213830999493950': [
+      {gid:'1213830999493950',name:'(OKRs de Business Dev Q2 — pendiente)',email:'gabriele.aluigi@'+d}
+    ],
+    // Q2 · WORKOUTS
+    '1214058200349927': [
+      {gid:'1214058408968435',name:'Jesús Blanco OKR - Design the strategy for Technical Levels',email:'jesus.blanco@'+d}
+    ]
+  };
+
+  // ── TAREAS estáticas por goal GID ────────────────────────────────────────────
+  var TASKS = {
+    '1212696402802293': [
+      {gid:'1212696395788575',name:'Document the Full Energy evaluation model (Mystery, Coaches, AI, etc.)',completed:true,assignee:'Carlos Fernández',due_on:'2026-01-09'},
+      {gid:'1212625366065917',name:'Execute Mystery Shopper evaluations and generate documented improvement opportunities',completed:true,assignee:'Carlos Fernández',due_on:'2026-01-27'},
+      {gid:'1212625366065918',name:'Define and activate an operational improvement plan based on FES, Mystery Shopper and internal audit insights',completed:true,assignee:'Carlos Fernández',due_on:'2026-02-28'}
+    ],
+    '1212696396083776': [
+      {gid:'1212625366065909',name:'Implement 100% Wellhub and 50% Urban Sports in clubs planned for Q1',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
+      {gid:'1212625366065910',name:'Define the operational integration of TotalPass and ClassPass',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
+      {gid:'1212625366065911',name:'Identify, document, and present at least 3 actionable opportunities for improvement',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
+      {gid:'1212625366065912',name:'Implement schedule adjustments in clubs with aggregators',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
+      {gid:'1212625366065914',name:'Reduce the number of operational incidents involving aggregators vs Q4 2025',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
+      {gid:'1212625366065913',name:'Achieve 90% of the aggregator budget Own Centers defined for Q1',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'}
+    ],
+    '1213939067410334': [
+      {gid:'1213939530361007',name:'Structured and operational knowledge base',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
+      {gid:'1213939530361016',name:'Creation, update and governance flow implemented',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
+      {gid:'1213939492461828',name:'Real activation of knowledge (bots / operations usage)',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
+      {gid:'1213939492461835',name:'Maintenance and scalability model',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'}
+    ]
+  };
+
+  // ── STATUS MAP ───────────────────────────────────────────────────────────────
   var STATUS_MAP = {
-    green:    {cls:'a-green',    label:'En curso ✅'},
-    yellow:   {cls:'a-yellow',   label:'En riesgo ⚠️'},
-    red:      {cls:'a-red',      label:'Con retraso 🔴'},
-    achieved: {cls:'a-achieved', label:'Logrado 🏆'},
-    partial:  {cls:'a-partial',  label:'Parcial 🟡'},
-    missed:   {cls:'a-missed',   label:'No cumplido ❌'},
-    dropped:  {cls:'a-dropped',  label:'Descartado ⬜'}
+    green:   {cls:'a-green',   label:'En curso ✅'},
+    yellow:  {cls:'a-yellow',  label:'En riesgo ⚠️'},
+    red:     {cls:'a-red',     label:'Con retraso 🔴'},
+    achieved:{cls:'a-achieved',label:'Logrado 🏆'},
+    partial: {cls:'a-partial', label:'Parcial 🟡'},
+    missed:  {cls:'a-missed',  label:'No cumplido ❌'},
+    dropped: {cls:'a-dropped', label:'Descartado ⬜'}
   };
-
   var ALL_S = Object.keys(STATUS_MAP);
 
-  var AREA_RE = /^(OKR|OKT|BFI[\s_]OKR)[\s_]*(1T|2T|3T|4T|Q1|Q2|Q3|Q4)[\s_]*\d{4}/i;
+  // ── STATE ────────────────────────────────────────────────────────────────────
+  var state = {
+    periodGid:'1203122935275353', periodName:'2T 2026',
+    areaGid:'', areaName:'',
+    status:'', goalGid:'', goalName:'', goalOwner:''
+  };
 
   function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  // ── Event delegation (un solo listener) ───────────────────────────────────
+  // ── EVENT DELEGATION ─────────────────────────────────────────────────────────
   document.addEventListener('click', function(e){
-    var el = e.target;
-    // Buscar el elemento con data-action más cercano
-    while(el && !el.dataset.action) el = el.parentElement;
+    var el=e.target;
+    while(el && !el.dataset.action) el=el.parentElement;
     if(!el) return;
-    var action = el.dataset.action;
-    if(action === 'period')  { e.preventDefault(); doPeriod(el); }
-    if(action === 'status')  { e.preventDefault(); doStatus(el); }
-    if(action === 'submit')  { e.preventDefault(); doSubmit(); }
-    if(action === 'reset')   { e.preventDefault(); doReset(); }
-    if(action === 'task-cb') { doTaskToggle(el); }
-    if(action === 'show-comment') { showCommentArea(el.dataset.gid); }
-    if(action === 'task-comment') { e.preventDefault(); doTaskComment(el); }
+    var a=el.dataset.action;
+    if(a==='period')      { e.preventDefault(); doPeriod(el); }
+    if(a==='area')        { e.preventDefault(); doArea(el); }
+    if(a==='status')      { e.preventDefault(); doStatus(el); }
+    if(a==='submit')      { e.preventDefault(); doSubmit(); }
+    if(a==='reset')       { e.preventDefault(); doReset(); }
+    if(a==='task-cb')     { doTaskToggle(el); }
+    if(a==='show-comment'){ showCommentArea(el.dataset.gid); }
+    if(a==='task-comment'){ e.preventDefault(); doTaskComment(el); }
   });
 
   document.getElementById('f-goal').addEventListener('change', function(){
-    var val = this.value;
-    var info = document.getElementById('ai-info');
-    var tsec = document.getElementById('tasks-section');
+    var val=this.value;
+    var info=document.getElementById('ai-info');
+    var tsec=document.getElementById('tasks-section');
     if(!val){ state.goalGid=''; state.goalName=''; state.goalOwner=''; info.textContent='Selecciona tu OKR para ver los destinatarios automáticos.'; tsec.style.display='none'; return; }
-    var p = val.split('|');
-    state.goalGid   = p[0];
-    state.goalName  = p[1];
-    state.goalOwner = p[2]||'';
+    var p=val.split('|');
+    state.goalGid=p[0]; state.goalName=p[1]; state.goalOwner=p[2]||'';
     if(state.goalOwner){
-      info.innerHTML = '<strong>Recibirán automáticamente:</strong> '+esc(state.goalOwner)+' y los seguidores del goal en Asana.';
+      info.innerHTML='<strong>Recibirán automáticamente:</strong> '+esc(state.goalOwner)+' y los seguidores del goal en Asana.';
       document.querySelectorAll('.xr').forEach(function(cb){ if(cb.value===state.goalOwner) cb.checked=true; });
     } else {
-      info.textContent = 'Los seguidores del goal en Asana recibirán la notificación.';
+      info.textContent='Los seguidores del goal en Asana recibirán la notificación.';
     }
     loadTasks(state.goalGid);
   });
 
-  // ── Period ─────────────────────────────────────────────────────────────────
+  // ── PERIOD ───────────────────────────────────────────────────────────────────
   function doPeriod(btn){
-    state.periodGid  = btn.dataset.gid;
-    state.periodName = btn.dataset.name;
+    state.periodGid=btn.dataset.gid; state.periodName=btn.dataset.name;
+    state.areaGid=''; state.areaName='';
     document.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
-    loadGoals(state.periodGid);
+    renderAreas();
+    resetOKR();
   }
 
-  // ── Status ─────────────────────────────────────────────────────────────────
-  function doStatus(btn){
-    var s = btn.dataset.status;
-    state.status = s;
-    ALL_S.forEach(function(x){
-      var b = document.getElementById('sbtn-'+x);
-      if(b) b.className = 'sbtn' + (x===s ? ' '+STATUS_MAP[x].cls : '');
-    });
+  // ── AREAS ────────────────────────────────────────────────────────────────────
+  function renderAreas(){
+    var grid=document.getElementById('area-grid');
+    var areas=AREAS[state.periodGid]||[];
+    if(!areas.length){ grid.innerHTML='<div class="hint">No hay áreas para este trimestre aún.</div>'; return; }
+    grid.innerHTML=areas.map(function(a){
+      return '<button class="abtn'+(a.gid===state.areaGid?' active':'')+'" data-action="area" data-gid="'+a.gid+'" data-name="'+esc(a.name)+'">'
+           + '<div class="adot"></div>'+esc(a.name)+'</button>';
+    }).join('');
   }
 
-  // ── Load goals ─────────────────────────────────────────────────────────────
-  function loadGoals(gid){
-    var sel   = document.getElementById('f-goal');
-    var hint  = document.getElementById('okr-hint');
-    sel.disabled = true;
-    sel.innerHTML = '<option value="">Cargando...</option>';
-    hint.textContent = 'Cargando OKRs del trimestre...';
-    hint.style.display = 'block';
+  function doArea(btn){
+    state.areaGid=btn.dataset.gid; state.areaName=btn.dataset.name;
+    document.querySelectorAll('.abtn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    populateGoals(state.areaGid);
+  }
+
+  // ── GOALS ────────────────────────────────────────────────────────────────────
+  function populateGoals(areaGid){
+    var sel=document.getElementById('f-goal');
+    var hint=document.getElementById('okr-hint');
+    var goals=GOALS[areaGid]||[];
     state.goalGid=''; state.goalName=''; state.goalOwner='';
     document.getElementById('tasks-section').style.display='none';
     document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
 
-    fetch(N8N_GOALS+'?time_period_gid='+gid)
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        hint.style.display='none';
-        var raw = Array.isArray(data) ? data : (data.goals||data.data||[]);
-        var goals = raw
-          .filter(function(g){ return g&&g.name; })
-          .sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
-        if(!goals.length){
-          sel.innerHTML='<option value="">No hay OKRs para este trimestre</option>';
-          sel.disabled=false; return;
-        }
-        // Agrupar por equipo
-        var groups = {};
-        goals.forEach(function(g){
-          var name = g.name || '';
-          var areaMatch = name.match(/(?:OKR|OKT|BFI\s+OKR)\s*(?:\dT\s*\d{4}|\d{4})\s*[-–]?\s*(.+)/i);
-          var team;
-          if(areaMatch) {
-            team = areaMatch[1].trim() || 'Área';
-          } else {
-            team = (g.team && g.team.name) || g.team_name || g.owner_name || 'Sin equipo';
-          }
-          team = team.replace(/^BFI\s+/i,'');
-          if(!groups[team]) groups[team] = [];
-          groups[team].push(g);
-        });
-        // Ordenar: OKRs de área primero (los que vienen del nombre), luego el resto alfabético
-        var areaRE = /^(OKR|OKT|BFI\s+OKR)/i;
-        var teamNames = Object.keys(groups).sort(function(a, b){
-          var aIsArea = groups[a].some(function(g){ return areaRE.test(g.name); });
-          var bIsArea = groups[b].some(function(g){ return areaRE.test(g.name); });
-          if(aIsArea && !bIsArea) return -1;
-          if(!aIsArea && bIsArea) return 1;
-          return a.localeCompare(b);
-        });
-        var html = '<option value="">— Selecciona tu OKR —</option>';
-        teamNames.forEach(function(team){
-          html += '<optgroup label="' + esc(team) + '">';
-          var areaFirst = groups[team].slice().sort(function(a, b){
-            var aArea = /^(OKR|OKT|BFI)/i.test(a.name);
-            var bArea = /^(OKR|OKT|BFI)/i.test(b.name);
-            if(aArea && !bArea) return -1;
-            if(!aArea && bArea) return 1;
-            return a.name.localeCompare(b.name);
-          });
-          areaFirst.forEach(function(g){
-            html += '<option value="'+esc(g.gid)+'|'+esc(g.name)+'|'+esc(g.owner_email||'')+'">'+esc(g.name)+'</option>';
-          });
-          html += '</optgroup>';
-        });
-        sel.innerHTML=html;
-        sel.disabled=false;
-      })
-      .catch(function(){
-        hint.textContent='No se pudieron cargar los OKRs.';
-        sel.innerHTML='<option value="">Error al cargar</option>';
-        sel.disabled=false;
-      });
+    if(!goals.length){
+      hint.textContent='Sin OKRs configurados para esta área.';
+      hint.style.display='block';
+      sel.innerHTML='<option value="">— Sin OKRs —</option>';
+      sel.disabled=true; return;
+    }
+    hint.style.display='none';
+    sel.innerHTML='<option value="">— Selecciona tu OKR —</option>'
+      +goals.map(function(g){
+        return '<option value="'+esc(g.gid)+'|'+esc(g.name)+'|'+esc(g.email||'')+'">'+esc(g.name)+'</option>';
+      }).join('');
+    sel.disabled=false;
   }
 
-  // ── Load tasks ─────────────────────────────────────────────────────────────
-  function loadTasks(goalGid){
-    var tsec  = document.getElementById('tasks-section');
-    var hint  = document.getElementById('tasks-hint');
-    var list  = document.getElementById('tasks-list');
-    tsec.style.display='block';
-    hint.style.display='block';
-    hint.textContent='Cargando tareas...';
-    list.style.display='none';
-    list.innerHTML='';
+  function resetOKR(){
+    var sel=document.getElementById('f-goal');
+    sel.innerHTML='<option value="">— Selecciona tu OKR —</option>';
+    sel.disabled=true;
+    document.getElementById('okr-hint').style.display='none';
+    state.goalGid=''; state.goalName=''; state.goalOwner='';
+    document.getElementById('tasks-section').style.display='none';
+    document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
+  }
 
+  // ── TASKS ────────────────────────────────────────────────────────────────────
+  function loadTasks(goalGid){
+    var tsec=document.getElementById('tasks-section');
+    var hint=document.getElementById('tasks-hint');
+    var list=document.getElementById('tasks-list');
+    var staticTasks=TASKS[goalGid];
+
+    if(staticTasks){
+      renderTaskList(staticTasks, tsec, hint, list); return;
+    }
+    // Intentar n8n si no hay datos estáticos
+    tsec.style.display='block'; hint.style.display='block'; hint.textContent='Cargando tareas...'; list.style.display='none'; list.innerHTML='';
     fetch(N8N_TASKS+'?goal_gid='+goalGid)
       .then(function(r){ return r.json(); })
       .then(function(data){
-        hint.style.display='none';
-        var tasks = Array.isArray(data) ? data : (data.tasks || data.data || []);
+        var tasks=Array.isArray(data)?data:(data.tasks||data.data||[]);
         if(!tasks||!tasks.length){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; return; }
-        list.style.display='block';
-        var html='';
-        tasks.forEach(function(t){
-          var chk=t.completed?'checked':'';
-          var meta=[];
-          if(t.assignee) meta.push(esc(t.assignee));
-          if(t.due_on)   meta.push(t.due_on);
-          html+='<div class="titem" id="ti-'+t.gid+'">';
-          html+='<input type="checkbox" '+chk+' data-action="task-cb" data-gid="'+t.gid+'">';
-          html+='<div style="flex:1;"><div class="tname'+(t.completed?' done':'')+'" id="tn-'+t.gid+'">'+esc(t.name)+'</div>';
-          if(meta.length) html+='<div class="tmeta">'+meta.join(' · ')+'</div>';
-          html+='<div id="comment-area-'+t.gid+'" style="margin-top:8px;">';
-          html+='<div style="display:flex;gap:6px;margin-bottom:4px;">';
-          html+='<textarea id="tc-'+t.gid+'" placeholder="Comentario o enlace de Drive..." style="flex:1;padding:6px 8px;font-family:inherit;font-size:12px;border:1px solid #e0dfd8;resize:none;height:30px;outline:none;transition:height .15s;"></textarea>';
-          html+='<button data-action="task-comment" data-gid="'+t.gid+'" style="padding:6px 10px;background:#000;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;height:30px;" id="cbtn-'+t.gid+'">Guardar</button>';
-          html+='</div>';
-          
-          html+='</div>';
-          html+='<div id="comment-sent-'+t.gid+'" style="display:none;margin-top:8px;">';
-          html+='<span style="font-size:11px;color:#16a34a;font-weight:700;">✓ Enviado</span> · ';
-          html+='<span style="font-size:11px;color:#555;cursor:pointer;text-decoration:underline;" data-action="show-comment" data-gid="'+t.gid+'">Añadir nuevo comentario</span>';
-          html+='</div>';
-          html+='</div></div>';
-        });
-        list.innerHTML=html;
+        renderTaskList(tasks, tsec, hint, list);
       })
-      .catch(function(){
-        hint.textContent='No se pudieron cargar las tareas.';
-        hint.style.display='block';
-      });
+      .catch(function(){ hint.textContent='Sin tareas conectadas para este OKR.'; hint.style.display='block'; list.style.display='none'; });
   }
 
-  // ── Task toggle ────────────────────────────────────────────────────────────
+  function renderTaskList(tasks, tsec, hint, list){
+    hint.style.display='none'; tsec.style.display='block'; list.style.display='block';
+    list.innerHTML=tasks.map(function(t){
+      var meta=[]; if(t.assignee) meta.push(esc(t.assignee)); if(t.due_on) meta.push(t.due_on);
+      return '<div class="titem" id="ti-'+t.gid+'">'
+        +'<input type="checkbox"'+(t.completed?' checked':'')+' data-action="task-cb" data-gid="'+t.gid+'">'
+        +'<div style="flex:1;">'
+        +'<div class="tname'+(t.completed?' done':'')+'" id="tn-'+t.gid+'">'+esc(t.name)+'</div>'
+        +(meta.length?'<div class="tmeta">'+meta.join(' · ')+'</div>':'')
+        +'<div id="comment-area-'+t.gid+'" style="margin-top:8px;">'
+        +'<div style="display:flex;gap:6px;">'
+        +'<textarea id="tc-'+t.gid+'" placeholder="Comentario o enlace..." style="flex:1;padding:6px 8px;font-family:inherit;font-size:12px;border:1px solid #e0dfd8;resize:none;height:30px;outline:none;"></textarea>'
+        +'<button data-action="task-comment" data-gid="'+t.gid+'" style="padding:6px 10px;background:#000;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;height:30px;" id="cbtn-'+t.gid+'">Guardar</button>'
+        +'</div></div>'
+        +'<div id="comment-sent-'+t.gid+'" style="display:none;margin-top:8px;">'
+        +'<span style="font-size:11px;color:#16a34a;font-weight:700;">✓ Enviado</span> · '
+        +'<span style="font-size:11px;color:#555;cursor:pointer;text-decoration:underline;" data-action="show-comment" data-gid="'+t.gid+'">Añadir nuevo</span>'
+        +'</div>'
+        +'</div></div>';
+    }).join('');
+  }
+
+  // ── STATUS ───────────────────────────────────────────────────────────────────
+  function doStatus(btn){
+    state.status=btn.dataset.status;
+    ALL_S.forEach(function(x){ var b=document.getElementById('sbtn-'+x); if(b) b.className='sbtn'+(x===state.status?' '+STATUS_MAP[x].cls:''); });
+  }
+
+  // ── TASK TOGGLE ──────────────────────────────────────────────────────────────
   function doTaskToggle(cb){
-    var gid  = cb.dataset.gid;
-    var done = cb.checked;
-    var nameEl = document.getElementById('tn-'+gid);
+    var gid=cb.dataset.gid; var done=cb.checked;
+    var nameEl=document.getElementById('tn-'+gid);
     if(nameEl) nameEl.className='tname'+(done?' done':'');
-    fetch(N8N_DONE,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({task_gid:gid,completed:done})
-    }).catch(function(){
-      cb.checked=!done;
-      if(nameEl) nameEl.className='tname'+(!done?' done':'');
-    });
+    fetch(N8N_DONE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_gid:gid,completed:done})})
+      .catch(function(){ cb.checked=!done; if(nameEl) nameEl.className='tname'+(!done?' done':''); });
   }
 
-  // ── Task comment ───────────────────────────────────────────────────────────
-  function checkFileSize(input){
-    var maxMB = 5;
-    if(input.files && input.files[0] && input.files[0].size > maxMB * 1024 * 1024){
-      alert('El archivo supera los 5MB. Por favor selecciona un archivo más pequeño.');
-      input.value = '';
-    }
-  }
-
+  // ── TASK COMMENT ─────────────────────────────────────────────────────────────
   function showCommentArea(gid){
     document.getElementById('comment-sent-'+gid).style.display='none';
     document.getElementById('comment-area-'+gid).style.display='block';
-    var ta = document.getElementById('tc-'+gid);
-    if(ta){ ta.value=''; ta.style.height='30px'; }
-    var fi = document.getElementById('tf-'+gid);
-    if(fi) fi.value='';
+    var ta=document.getElementById('tc-'+gid); if(ta){ ta.value=''; ta.style.height='30px'; }
   }
 
   function doTaskComment(btn){
-    var gid  = btn.dataset.gid;
-    var ta   = document.getElementById('tc-'+gid);
-    var fi   = document.getElementById('tf-'+gid);
-    var text = ta ? ta.value.trim() : '';
-    var file = fi && fi.files && fi.files[0] ? fi.files[0] : null;
-    if(!text && !file) return;
-    var userName = (document.getElementById('f-name').value||'').trim() || 'Xcellence';
+    var gid=btn.dataset.gid; var ta=document.getElementById('tc-'+gid);
+    var text=ta?ta.value.trim():''; if(!text) return;
+    var userName=(document.getElementById('f-name').value||'').trim()||'Xcellence';
     btn.textContent='...'; btn.disabled=true;
-
-    var commentPromise = text
-      ? fetch(N8N_DONE.replace('okr-completar-tarea','okr-comentar-tarea'),{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({task_gid:gid,comment:text,user_name:userName})
-        })
-      : Promise.resolve();
-
-    var filePromise = file
-      ? (function(){
-          return new Promise(function(resolve, reject){
-            var reader = new FileReader();
-            reader.onload = function(e){
-              var base64 = e.target.result.split(',')[1];
-              fetch(N8N_DONE.replace('okr-completar-tarea','okr-adjunto-tarea'),{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({task_gid:gid,file_name:file.name,file_data:base64,file_type:file.type,user_name:userName})
-              }).then(resolve).catch(reject);
-            };
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-          });
-        })()
-      : Promise.resolve();
-
-    Promise.all([commentPromise, filePromise])
-      .then(function(){
-        document.getElementById('comment-area-'+gid).style.display='none';
-        document.getElementById('comment-sent-'+gid).style.display='block';
-        btn.textContent='Guardar'; btn.disabled=false;
-      })
-      .catch(function(){
-        btn.textContent='Guardar'; btn.disabled=false;
-      });
+    fetch(N8N_COMMENT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_gid:gid,comment:text,user_name:userName})})
+      .then(function(){ document.getElementById('comment-area-'+gid).style.display='none'; document.getElementById('comment-sent-'+gid).style.display='block'; btn.textContent='Guardar'; btn.disabled=false; })
+      .catch(function(){ btn.textContent='Guardar'; btn.disabled=false; });
   }
 
-  // ── Submit ─────────────────────────────────────────────────────────────────
+  // ── SUBMIT ───────────────────────────────────────────────────────────────────
   function doSubmit(){
-    var e=document.getElementById('errmsg');
-    e.className='errmsg';
-    if(!state.goalGid) { e.textContent='Selecciona tu OKR.';           e.className='errmsg show'; return; }
-    if(!state.status)  { e.textContent='Selecciona el estado actual.'; e.className='errmsg show'; return; }
+    var e=document.getElementById('errmsg'); e.className='errmsg';
+    if(!state.areaGid)  { e.textContent='Selecciona tu área.';          e.className='errmsg show'; return; }
+    if(!state.goalGid)  { e.textContent='Selecciona tu OKR.';           e.className='errmsg show'; return; }
+    if(!state.status)   { e.textContent='Selecciona el estado actual.'; e.className='errmsg show'; return; }
+    var userName=(document.getElementById('f-name').value||'').trim();
+    if(!userName){ e.textContent='Escribe tu nombre.'; e.className='errmsg show'; return; }
 
-    var userName = (document.getElementById('f-name').value||'').trim();
-    if(!userName) { e.textContent='Escribe tu nombre.'; e.className='errmsg show'; return; }
-    var comment    = document.getElementById('f-comment').value.trim();
-    var extraEmail = document.getElementById('extra-email').value.trim();
+    var comment=document.getElementById('f-comment').value.trim();
+    var extraEmail=document.getElementById('extra-email').value.trim();
     var extra=[];
     document.querySelectorAll('.xr:checked').forEach(function(cb){ extra.push(cb.value); });
     if(extraEmail&&extraEmail.indexOf('@')>-1) extra.push(extraEmail);
@@ -551,43 +643,34 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var dateStr=today.getDate()+' '+months[today.getMonth()]+' '+today.getFullYear();
 
     var payload={
-      goal_gid:    state.goalGid,
-      goal_name:   state.goalName,
-      goal_owner:  state.goalOwner,
-      period:      state.periodName,
-      status:      state.status,
-      comment:     comment,
-      extra_recipients: extra,
-      date:        dateStr,
-      timestamp:   new Date().toISOString(),
-      user_name:   userName || state.goalName,
-      user_email:  state.goalOwner
+      goal_gid:state.goalGid, goal_name:state.goalName, goal_owner:state.goalOwner,
+      area_gid:state.areaGid, area_name:state.areaName,
+      period:state.periodName, status:state.status, comment:comment,
+      extra_recipients:extra, date:dateStr, timestamp:new Date().toISOString(),
+      user_name:userName, user_email:state.goalOwner
     };
 
     var btn=document.getElementById('btn-submit');
-    btn.disabled=true; btn.classList.add('loading');
-    btn.firstChild.nodeValue='Enviando... ';
+    btn.disabled=true; btn.classList.add('loading'); btn.firstChild.nodeValue='Enviando... ';
 
     fetch(N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){
-        if(!r.ok) throw new Error('HTTP '+r.status);
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r; })
+      .then(function(){
         var sl=STATUS_MAP[state.status]?STATUS_MAP[state.status].label:state.status;
         document.getElementById('success-msg').textContent='"'+state.goalName+'" marcado como '+sl+'.';
         document.getElementById('fa').classList.add('hidden');
         document.getElementById('success-screen').classList.add('show');
       })
       .catch(function(){
-        btn.disabled=false; btn.classList.remove('loading');
-        btn.firstChild.nodeValue='Enviar actualización ';
+        btn.disabled=false; btn.classList.remove('loading'); btn.firstChild.nodeValue='Enviar actualización ';
         e.textContent='No se pudo conectar. Contacta con elevate.xcellence@brooklynfitboxing.com';
         e.className='errmsg show';
       });
   }
 
-  // ── Reset ──────────────────────────────────────────────────────────────────
+  // ── RESET ────────────────────────────────────────────────────────────────────
   function doReset(){
-    var prevGoalGid = state.goalGid;
-    state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner='';
+    state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner=''; state.areaGid=''; state.areaName='';
     document.getElementById('f-name').value='';
     document.getElementById('f-comment').value='';
     document.getElementById('extra-email').value='';
@@ -595,18 +678,17 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     document.getElementById('tasks-section').style.display='none';
     document.getElementById('tasks-list').innerHTML='';
     ALL_S.forEach(function(x){ var b=document.getElementById('sbtn-'+x); if(b) b.className='sbtn'; });
-    document.querySelectorAll('.xr').forEach(function(cb){ cb.checked = cb.id === 'xr-ex'; });
+    document.querySelectorAll('.xr').forEach(function(cb){ cb.checked=cb.id==='xr-ex'; });
     var btn=document.getElementById('btn-submit');
-    btn.disabled=false; btn.classList.remove('loading');
-    btn.firstChild.nodeValue='Enviar actualización ';
+    btn.disabled=false; btn.classList.remove('loading'); btn.firstChild.nodeValue='Enviar actualización ';
     document.getElementById('fa').classList.remove('hidden');
     document.getElementById('success-screen').classList.remove('show');
-    window.scrollTo(0, 0);
-    loadGoals(state.periodGid);
+    renderAreas(); resetOKR();
+    window.scrollTo(0,0);
   }
 
-  // ── Init ───────────────────────────────────────────────────────────────────
-  loadGoals(state.periodGid);
+  // ── INIT ─────────────────────────────────────────────────────────────────────
+  renderAreas();
 
 })();
 </script>
