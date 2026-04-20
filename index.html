@@ -234,7 +234,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
           </div>
         </div>
 
-        <button class="bsub" id="btn-submit" data-action="submit">
+        <button class="bsub" id="btn-submit" onclick="doSubmit()">
           Enviar actualización
           <span class="spin-el"></span>
         </button>
@@ -244,7 +244,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
         <div class="sicon">&#10003;</div>
         <h2>Actualización enviada</h2>
         <p id="success-msg"></p>
-        <button class="bagain" data-action="reset">Nueva actualización</button>
+        <button class="bagain" onclick="doReset()">Nueva actualización</button>
       </div>
     </div>
   </div>
@@ -724,6 +724,10 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
 
   // ── INIT ─────────────────────────────────────────────────────────────────────
   renderAreas();
+
+  // Exponer al scope global para los onclick del HTML
+  window.doSubmit = doSubmit;
+  window.doReset  = doReset;
 
 })();
 </script>
