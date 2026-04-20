@@ -410,14 +410,15 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     ]
   };
 
-  // ── TAREAS estáticas por goal GID ────────────────────────────────────────────
+  // ── TAREAS estáticas por goal GID (completas Q1 + Q2) ────────────────────
   var TASKS = {
-    '1212696402802293': [
+    // ── Q1 ELEVATE OPERATIONS ──
+    '1212696402802293': [ // Carlos Fernández - Full Energy
       {gid:'1212696395788575',name:'Document the Full Energy evaluation model (Mystery, Coaches, AI, etc.)',completed:true,assignee:'Carlos Fernández',due_on:'2026-01-09'},
       {gid:'1212625366065917',name:'Execute Mystery Shopper evaluations and generate documented improvement opportunities',completed:true,assignee:'Carlos Fernández',due_on:'2026-01-27'},
       {gid:'1212625366065918',name:'Define and activate an operational improvement plan based on FES, Mystery Shopper and internal audit insights',completed:true,assignee:'Carlos Fernández',due_on:'2026-02-28'}
     ],
-    '1212696396083776': [
+    '1212696396083776': [ // Martina Marano - Aggregators
       {gid:'1212625366065909',name:'Implement 100% Wellhub and 50% Urban Sports in clubs planned for Q1',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
       {gid:'1212625366065910',name:'Define the operational integration of TotalPass and ClassPass',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
       {gid:'1212625366065911',name:'Identify, document, and present at least 3 actionable opportunities for improvement',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
@@ -425,23 +426,168 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       {gid:'1212625366065914',name:'Reduce the number of operational incidents involving aggregators vs Q4 2025',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'},
       {gid:'1212625366065913',name:'Achieve 90% of the aggregator budget Own Centers defined for Q1',completed:true,assignee:'Martina Marano',due_on:'2026-03-31'}
     ],
-    '1213939067410334': [
+    // ── Q2 ELEVATE OPERATIONS ──
+    '1213939067410334': [ // Carlos Fernández - Brooklyn Brain
       {gid:'1213939530361007',name:'Structured and operational knowledge base',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
       {gid:'1213939530361016',name:'Creation, update and governance flow implemented',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
       {gid:'1213939492461828',name:'Real activation of knowledge (bots / operations usage)',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
       {gid:'1213939492461835',name:'Maintenance and scalability model',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'}
     ],
-    // Q2 · Patricia Aldeamil OKR - 5% WO from affiliates
-    '1214059490220581': [
+    '1213964203114586': [ // Denis Torres - Quality evaluations
+      {gid:'1213964202991096',name:'Execution and backlog recovery of evaluation calendar',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
+      {gid:'1213964202991103',name:'On-site validation and real context insights',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
+      {gid:'1213964203114575',name:'Data analysis and activation of preventive actions',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'}
+    ],
+    '1214057454860969': [ // Carlos de la Iglesia - Zendesk automation
+      {gid:'1214059505768354',name:'Analysis of automation options',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'},
+      {gid:'1214059505839087',name:'Automation testing and data review',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'},
+      {gid:'1214059505839088',name:'Test results',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'}
+    ],
+    '1214059513422349': [ // Alejandro Gómez - Core OS Infrastructure
+      {gid:'1214055973525181',name:'Study Terraform documentation and feasibility',completed:false,assignee:'Alejandro Gómez',due_on:'2026-06-30'},
+      {gid:'1214055973525182',name:'Create a rollback plan in case of errors',completed:false,assignee:'Alejandro Gómez',due_on:'2026-06-30'},
+      {gid:'1214055973525183',name:'Prepare code and monitoring dashboard for terraform',completed:false,assignee:'Alejandro Gómez',due_on:'2026-06-30'},
+      {gid:'1214059486517571',name:'Try the update remotely from Terraform',completed:false,assignee:'Alejandro Gómez',due_on:'2026-06-30'}
+    ],
+    '1214058669344864': [ // Adrián Bravo - MiniPC Infrastructure
+      {gid:'1214058201085409',name:'Update the test MiniPC to Ubuntu 26',completed:false,assignee:'Adrián Bravo',due_on:'2026-06-30'},
+      {gid:'1214058201085411',name:'Test the updated system and refactor any incompatible elements',completed:false,assignee:'Adrián Bravo',due_on:'2026-06-30'},
+      {gid:'1214058201085413',name:'Test an updated computer in a real-world setting',completed:false,assignee:'Adrián Bravo',due_on:'2026-06-30'},
+      {gid:'1214058363644317',name:'Integrate the mini-PC network into Terraform',completed:false,assignee:'Adrián Bravo',due_on:'2026-06-30'}
+    ],
+    '1214061100243165': [ // Luiz Morete - Marketing & aggregators procedures
+      {gid:'1214065030894485',name:'Identify and categorize the top 5 recurring Marketing ticket categories from Q1 2026',completed:false,assignee:'Luiz Morete',due_on:'2026-06-30'},
+      {gid:'1214065030894486',name:'Develop conversational self-service flows for the top 5 highest-volume Marketing tickets',completed:false,assignee:'Luiz Morete',due_on:'2026-06-30'},
+      {gid:'1214058672854903',name:'Identify and categorize the top 5 recurring aggregator ticket categories from Q1 2026',completed:false,assignee:'Luiz Morete',due_on:'2026-06-30'},
+      {gid:'1214058672854904',name:'Develop conversational self-service flows for the top 5 highest-volume aggregator tickets',completed:false,assignee:'Luiz Morete',due_on:'2026-06-30'}
+    ],
+    '1214057454860953': [ // Saray Hermoso - Support bot
+      {gid:'1214057454732641',name:'Play Brooklyn bot',completed:false,assignee:'Saray Hermoso',due_on:'2026-06-30'},
+      {gid:'1214057454732645',name:'MyH4C bot',completed:false,assignee:'Saray Hermoso',due_on:'2026-06-30'},
+      {gid:'1214057454732646',name:'Marketing bot',completed:false,assignee:'Saray Hermoso',due_on:'2026-06-30'}
+    ],
+    '1214055977420631': [ // María Blanco - Affiliates WO
+      {gid:'1214059491238161',name:'Design the plan to improve affiliates',completed:false,assignee:'María Blanco',due_on:'2026-06-30'},
+      {gid:'1214057119599236',name:'Approve the plan with Strategic commission',completed:false,assignee:'María Blanco',due_on:'2026-06-30'},
+      {gid:'1214057119599238',name:'Prepare the Project for Affiliates improvement',completed:false,assignee:'María Blanco',due_on:'2026-06-30'},
+      {gid:'1214057119599240',name:'Start with the Affiliate improvement',completed:false,assignee:'María Blanco',due_on:'2026-06-30'},
+      {gid:'1214057119599242',name:'Follow the implementation and search for improvements',completed:false,assignee:'María Blanco',due_on:'2026-06-30'},
+      {gid:'1214057119599244',name:'Design and launch the new strategy for affiliates',completed:false,assignee:'María Blanco',due_on:'2026-06-30'}
+    ],
+    // ── Q2 ACADEMY ──
+    '1214059490220581': [ // Patricia Aldeamil - 5% WO affiliates
       {gid:'1214059491238151',name:'Do the training with new approach',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'},
       {gid:'1214059491238152',name:'Ensure the follow up through the website',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'},
       {gid:'1214059491238153',name:'Obtain 5% WO coming from affiliates',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'}
     ],
-    // Q2 · Denis Torres OKR - Quality evaluations
-    '1213964203114586': [
-      {gid:'1213964202991096',name:'Execution and backlog recovery of evaluation calendar',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
-      {gid:'1213964202991103',name:'On-site validation and real context insights',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
-      {gid:'1213964203114575',name:'Data analysis and activation of preventive actions',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'}
+    '1214115503005261': [ // Nico Ramo - WO from affiliates
+      {gid:'1214078512077520',name:'Obtain 2 testimonials from clubs that have recruited affiliates',completed:false,assignee:'Nico Ramo',due_on:'2026-06-30'},
+      {gid:'1214092078165137',name:'Usage analysis: Estimate the number of clubs using the tool',completed:false,assignee:'Nico Ramo',due_on:'2026-06-30'},
+      {gid:'1214092078165140',name:'O2O tracking: Continue integrating tracking into work plans',completed:false,assignee:'Nico Ramo',due_on:'2026-06-30'},
+      {gid:'1214092078165142',name:'Achieve an increase in the percentage of WO sales from members',completed:false,assignee:'Nico Ramo',due_on:'2026-06-30'}
+    ],
+    '1214115503005270': [ // Alicia Polo - WO from affiliates
+      {gid:'1214092078165147',name:'Obtain 2 testimonials from clubs that have recruited affiliates',completed:false,assignee:'Alicia Polo',due_on:'2026-06-30'},
+      {gid:'1214092078165148',name:'Organise training on how to make better use of the affiliate tool',completed:false,assignee:'Alicia Polo',due_on:'2026-06-30'},
+      {gid:'1214092078165149',name:'O2O Follow-up: Continue integrating follow-up into work plans',completed:false,assignee:'Alicia Polo',due_on:'2026-06-30'},
+      {gid:'1214092078165150',name:'Achieve an increase in the percentage of WO sales from affiliates',completed:false,assignee:'Alicia Polo',due_on:'2026-06-30'}
+    ],
+    '1214115503005279': [ // Raquel Riera - WO from affiliates
+      {gid:'1214092078165157',name:'Obtain 2 testimonials from clubs that have recruited affiliates',completed:false,assignee:'Raquel Riera',due_on:'2026-06-30'},
+      {gid:'1214092078165158',name:'Ensure that the training reaches an international audience',completed:false,assignee:'Raquel Riera',due_on:'2026-06-30'},
+      {gid:'1214092078165161',name:'O2O Follow-up: Continue integrating follow-up into work plans',completed:false,assignee:'Raquel Riera',due_on:'2026-06-30'},
+      {gid:'1214092078165163',name:'Achieve an increase in the percentage of WO sales from affiliates',completed:false,assignee:'Raquel Riera',due_on:'2026-06-30'}
+    ],
+    // ── Q2 LEGAL ──
+    '1214078156619837': [ // Cristina Calleja
+      {gid:'1214059488262044',name:'Assessment of the current situation: identify and classify types of FM interventions by category',completed:false,assignee:'Cristina Calleja',due_on:'2026-06-30'},
+      {gid:'1214057786795844',name:'Design a proactive support plan for franchisees with early warning signs and intervention protocols',completed:false,assignee:'Cristina Calleja',due_on:'2026-06-30'},
+      {gid:'1214057786795847',name:'Validation and roadmap: present the model to Decision-Making Committee with Q3 implementation proposal',completed:false,assignee:'Cristina Calleja',due_on:'2026-06-30'}
+    ],
+    '1214078156619834': [ // Antonella Marco
+      {gid:'1214059488262034',name:'Standardization of document naming and version control',completed:false,assignee:'Antonella Marco',due_on:'2026-06-30'},
+      {gid:'1214059488262032',name:'Inventory and classification of pending documentation',completed:false,assignee:'Antonella Marco',due_on:'2026-06-30'},
+      {gid:'1214059488262033',name:'Systematic migration to the new Drive structure',completed:false,assignee:'Antonella Marco',due_on:'2026-06-30'},
+      {gid:'1214059488262035',name:'Quality control and validation of organized documentation',completed:false,assignee:'Antonella Marco',due_on:'2026-06-30'}
+    ],
+    '1214078167143256': [ // Lucía Pérez
+      {gid:'1214059488262021',name:'Strategic Alignment: Meeting with Andreina and Laura to review licensing status of 36 centres',completed:false,assignee:'Lucía Pérez',due_on:'2026-06-30'},
+      {gid:'1214059488262022',name:'Administrative management: preparing objective cases and sending requests for posters',completed:false,assignee:'Lucía Pérez',due_on:'2026-06-30'},
+      {gid:'1214059488262023',name:'Monitoring of applications: Ongoing audit of how admissions are managed at centres',completed:false,assignee:'Lucía Pérez',due_on:'2026-06-30'},
+      {gid:'1214059488262024',name:'Execution: Checking that posters have been displayed in authorised centres',completed:false,assignee:'Lucía Pérez',due_on:'2026-06-30'}
+    ],
+    // ── Q2 PEOPLE ──
+    '1213889773139317': [ // Elena López
+      {gid:'1213889757378712',name:'Organise shadowing sessions within the Club: Complete 100% of scheduled shadowing sessions',completed:false,assignee:'Elena López',due_on:'2026-06-30'},
+      {gid:'1213889757378713',name:'Club Manager Validation: Ensure 95% of Club Managers validate the Immersion Checklist',completed:false,assignee:'Elena López',due_on:'2026-06-30'},
+      {gid:'1213889757378714',name:'Onboarding Speed: Ensure club induction takes place within first 30 working days',completed:false,assignee:'Elena López',due_on:'2026-06-30'}
+    ],
+    // ── Q2 FINANCIERO ──
+    '1214016584990642': [ // Carlos Alonso - Cost reduction France
+      {gid:'1214146552053060',name:'Redesign BF Clubs France cost structure after the asset sale',completed:false,assignee:'Carlos Alonso',due_on:'2026-06-30'}
+    ],
+    '1214016584990607': [ // Yuderky Maldonado - Monthly tax review
+      {gid:'1214146552053063',name:'Review the tax forms prepared by the tax agency before submission',completed:false,assignee:'Yuderky Maldonado',due_on:'2026-06-30'},
+      {gid:'1214146552053064',name:'Automated transfer of tax information from BC to the tax advisor',completed:false,assignee:'Yuderky Maldonado',due_on:'2026-06-30'}
+    ],
+    '1214016584990571': [ // Marta Rojo - Treasury implementation
+      {gid:'1214146552053067',name:'Generate monthly cash reports from BC',completed:false,assignee:'Marta Rojo',due_on:'2026-06-30'},
+      {gid:'1214146552053068',name:'Creation of a process in BC for the categorization of bank transactions',completed:false,assignee:'Marta Rojo',due_on:'2026-06-30'}
+    ],
+    '1214016583243714': [ // Andrés Pose - Carbon footprint
+      {gid:'1214146552053071',name:'Calculation of the carbon footprint - GERMANY',completed:false,assignee:'Andrés Pose',due_on:'2026-06-30'},
+      {gid:'1214146552053072',name:'Calculation of the carbon footprint - FRANCE',completed:false,assignee:'Andrés Pose',due_on:'2026-06-30'},
+      {gid:'1214146552053073',name:'Calculation of the carbon footprint - ITALY',completed:false,assignee:'Andrés Pose',due_on:'2026-06-30'},
+      {gid:'1214146552053074',name:'Calculation of the carbon footprint - SPAIN',completed:false,assignee:'Andrés Pose',due_on:'2026-06-30'}
+    ],
+    // ── Q2 MARKETING ──
+    '1213831324226863': [
+      {gid:'1212667725943857',name:'Ana López [KR] - Develop and deliver a content guide for club accounts covering the new positioning',completed:false,assignee:'Ana López',due_on:'2026-06-30'},
+      {gid:'1212667725943856',name:'Ana López [KR] - Launch a recurring content format that showcases the real life of fitboxers beyond training',completed:false,assignee:'Ana López',due_on:'2026-06-30'},
+      {gid:'1212667725943858',name:'Ana López [KR] - Launch an internal dashboard to track club activations and engagement rate',completed:false,assignee:'Ana López',due_on:'2026-06-30'},
+      {gid:'1212667725943861',name:'Silvia Arévalo [KR] - Develop and apply the new Global Content Strategy to at least one full Global Content Plan',completed:false,assignee:'Silvia Arévalo',due_on:'2026-06-30'},
+      {gid:'1212667725943862',name:'Silvia Arévalo [KR] - Establish a standardized Monthly Metrics Reporting process for all international markets',completed:false,assignee:'Silvia Arévalo',due_on:'2026-06-30'},
+      {gid:'1213865901580418',name:'Silvia Arévalo [KR] - Send the first monthly performance report to the CMO',completed:false,assignee:'Silvia Arévalo',due_on:'2026-06-30'},
+      {gid:'1213837032768965',name:'Olga Alejandre [KR] - Deliver the approved Brand Narrative & Messaging Framework to local and global teams',completed:false,assignee:'Olga Alejandre',due_on:'2026-06-30'},
+      {gid:'1213399545929621',name:'Olga Alejandre [KR] - Define and deliver a content strategy aligned with the new brand positioning',completed:false,assignee:'Olga Alejandre',due_on:'2026-06-30'},
+      {gid:'1213399545929622',name:'Olga Alejandre [KR] - Define brand awareness measurement framework',completed:false,assignee:'Olga Alejandre',due_on:'2026-06-30'},
+      {gid:'1213854110815346',name:'Vivi Fernández [KR] - Finish 1 course related to editing style tools',completed:false,assignee:'Vivi Fernández',due_on:'2026-06-30'},
+      {gid:'1213854174196016',name:'Vivi Fernández [KR] - Finish 1 course related to camera usage and quality guarantee',completed:false,assignee:'Vivi Fernández',due_on:'2026-06-30'},
+      {gid:'1213854174196017',name:'Vivi Fernández [KR] - Create a look and feel moodboard of at least 3 areas of marketing',completed:false,assignee:'Vivi Fernández',due_on:'2026-06-30'},
+      {gid:'1213854174196018',name:'Vivi Fernández [KR] - Create at least 3 videos using the new quality/style characteristics',completed:false,assignee:'Vivi Fernández',due_on:'2026-06-30'},
+      {gid:'1213854174196020',name:'Vivi Fernández [KR] - Create at least 5 static creativities using the new quality/style characteristics',completed:false,assignee:'Vivi Fernández',due_on:'2026-06-30'},
+      {gid:'1214012042724568',name:'Adolfo Fernández [KR] - Define and align on 100% of core business metrics with key stakeholders',completed:false,assignee:'Adolfo Fernández',due_on:'2026-06-30'},
+      {gid:'1214012042724569',name:'Adolfo Fernández [KR] - Implement an automated dashboard with timely and actionable business insights',completed:false,assignee:'Adolfo Fernández',due_on:'2026-06-30'},
+      {gid:'1214012042724570',name:'Adolfo Fernández [KR] - Generate and act on at least 3 actionable insights per month from the dashboard',completed:false,assignee:'Adolfo Fernández',due_on:'2026-06-30'},
+      {gid:'1214059484508953',name:'Manuel González [KR] - Achieve 15% of WOs coming from the affiliate channel',completed:false,assignee:'Manuel González',due_on:'2026-06-30'},
+      {gid:'1214059484508954',name:'Manuel González [KR] - Deliver a monthly activation report by club',completed:false,assignee:'Manuel González',due_on:'2026-06-30'},
+      {gid:'1214059484508955',name:'Manuel González [KR] - Close 3 Global Partner agreements',completed:false,assignee:'Manuel González',due_on:'2026-06-30'},
+      {gid:'1214059484508956',name:'Manuel González [KR] - Launch 1 Content Creators acquisition campaign [HQ]',completed:false,assignee:'Manuel González',due_on:'2026-06-30'},
+      {gid:'1214076993405449',name:'Camila Suárez [KR 1] - Co-define the conceptual vision and structure of the app',completed:false,assignee:'Camila Suárez',due_on:'2026-06-30'},
+      {gid:'1214076993405450',name:'Camila Suárez [KR 2] - Execute at least 2 monthly tests on the website',completed:false,assignee:'Camila Suárez',due_on:'2026-06-30'},
+      {gid:'1214059484508973',name:'Rochi Gonta [KR] - Launch the onboarding pack in Europe by September',completed:false,assignee:'Rochi Gonta',due_on:'2026-06-30'},
+      {gid:'1214059484508974',name:'Rochi Gonta [KR] - Generate 100K incremental revenue from onboarding packs',completed:false,assignee:'Rochi Gonta',due_on:'2026-06-30'},
+      {gid:'1214059484508957',name:'Javier Zarazaga [KR] - Engage franchisees in co-funded marketing initiatives, achieving at least 70% participation',completed:false,assignee:'Javier Zarazaga',due_on:'2026-06-30'}
+    ],
+    // ── Q2 POWER UP ──
+    '1213830999493945': [
+      {gid:'1214055971686555',name:'Raquel Gutiérrez [KR] - Achieve an average lead-to-WO conversion rate of 55%',completed:false,assignee:'Raquel Gutiérrez',due_on:'2026-06-30'},
+      {gid:'1214055971686560',name:'Alba Rojas [KR] - Achieve a monthly lead-to-WO conversion rate of 55%',completed:false,assignee:'Alba Rojas',due_on:'2026-06-30'},
+      {gid:'1214055971686564',name:'Elin Ribeiro [KR] - Achieve the monthly targets set for the quarter',completed:false,assignee:'Elin Ribeiro',due_on:'2026-06-30'},
+      {gid:'1214061529110438',name:'Sara Caramés [KR] - Achieve the monthly targets set for the quarter',completed:false,assignee:'Sara Caramés',due_on:'2026-06-30'},
+      {gid:'1214055971686570',name:'Ester Trío [KR] - Achieve an average lead-to-WO conversion rate of 55%',completed:false,assignee:'Ester Trío',due_on:'2026-06-30'},
+      {gid:'1214059484508930',name:'Toni Prestigiacomo [KR] - Achieve an average lead-to-WO conversion rate of 60%',completed:false,assignee:'Toni Prestigiacomo',due_on:'2026-06-30'},
+      {gid:'1214059484508933',name:'Antonio Moreno [KR] - Achieve a monthly lead-to-WO conversion rate of 60%',completed:false,assignee:'Antonio Moreno',due_on:'2026-06-30'},
+      {gid:'1214059484508936',name:'Larissa Beal [KR] - Achieve a monthly lead-to-WO conversion rate of 60%',completed:false,assignee:'Larissa Beal',due_on:'2026-06-30'},
+      {gid:'1214059484508939',name:'Laura Guagliumi [KR] - Achieve a monthly lead-to-WO conversion rate of 55%',completed:false,assignee:'Laura Guagliumi',due_on:'2026-06-30'}
+    ],
+    // ── Q2 WORKOUTS ──
+    '1214058408968435': [ // Jesús Blanco - Technical Levels
+      {gid:'1214058280777734',name:'Set Technical Levels criteria',completed:false,assignee:'Jesús Blanco',due_on:'2026-06-30'},
+      {gid:'1214058280777738',name:'Design the Technical Levels operation and Trainers requirements',completed:false,assignee:'Jesús Blanco',due_on:'2026-06-30'},
+      {gid:'1214058280777732',name:'Launch Technical Session pilot in BF Clubs Spain',completed:false,assignee:'Jesús Blanco',due_on:'2026-06-30'},
+      {gid:'1214058280777740',name:'Pilot: Trainers certifying Fitboxers on Technical Levels (1 and 2)',completed:false,assignee:'Jesús Blanco',due_on:'2026-06-30'},
+      {gid:'1214058280777735',name:'Set a date to launch new Technical Session in all clubs',completed:false,assignee:'Jesús Blanco',due_on:'2026-06-30'}
     ]
   };
 
@@ -557,25 +703,29 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
   }
 
-  // ── TASKS — siempre desde n8n, datos estáticos como preview inmediato ────────
+  // ── TASKS — GET a n8n ────────────────────────────────────────────────────
   function loadTasks(goalGid){
     var tsec=document.getElementById('tasks-section');
     var hint=document.getElementById('tasks-hint');
     var list=document.getElementById('tasks-list');
 
-    tsec.style.display='block';
-
-    // Mostrar datos estáticos inmediatamente si existen (mientras carga n8n)
     var staticTasks=TASKS[goalGid];
-    if(staticTasks){ renderTaskList(staticTasks, tsec, hint, list); }
-    else { hint.textContent='Cargando tareas...'; hint.style.display='block'; list.style.display='none'; list.innerHTML=''; }
+    if(staticTasks){
+      tsec.style.display='block';
+      renderTaskList(staticTasks, tsec, hint, list);
+    } else {
+      tsec.style.display='block';
+      hint.textContent='Cargando tareas...';
+      hint.style.display='block';
+      list.style.display='none';
+      list.innerHTML='';
+    }
 
-    // Siempre intentar cargar desde n8n con goal_gid + project_gid
-    var url=N8N_TASKS+'?goal_gid='+goalGid+(state.areaProject?'&project_gid='+state.areaProject:'');
+    var url = N8N_TASKS + '?goal_gid=' + goalGid + '&project_gid=' + (state.areaProject||'');
     fetch(url)
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
-        var tasks=Array.isArray(data)?data:(data.tasks||data.data||[]);
+        var tasks=Array.isArray(data)?data:(data.tasks||data.subtasks||data.data||[]);
         if(!tasks||!tasks.length){
           if(!staticTasks){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; list.style.display='none'; }
           return;
@@ -583,8 +733,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
         renderTaskList(tasks, tsec, hint, list);
       })
       .catch(function(){
-        // Si n8n falla y no hay estáticos, mostrar mensaje
-        if(!staticTasks){ hint.textContent='Sin tareas conectadas para este OKR.'; hint.style.display='block'; list.style.display='none'; }
+        if(!staticTasks){ hint.textContent='Sin tareas para este OKR.'; hint.style.display='block'; list.style.display='none'; }
       });
   }
 
