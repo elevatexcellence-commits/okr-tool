@@ -272,27 +272,27 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var el=document.getElementById(id); if(el) el.value=EMAILS[id];
   });
 
-  // ── AREAS por período ────────────────────────────────────────────────────────
+  // ── AREAS por período (con project GID para cargar tareas) ──────────────────
   var AREAS = {
     '1203122935275327': [
-      {gid:'1212556603278689', name:'Elevate Operations'},
-      {gid:'1212678989896206', name:'Academy'},
-      {gid:'1212851079304871', name:'Legal'},
-      {gid:'1212681019974361', name:'Marketing'},
-      {gid:'1212545601219989', name:'People'},
-      {gid:'1212816087341315', name:'Workouts'}
+      {gid:'1212556603278689', name:'Elevate Operations', project:'1208995793088056'},
+      {gid:'1212678989896206', name:'Academy',            project:'1208998741527738'},
+      {gid:'1212851079304871', name:'Legal',              project:'1209013952980960'},
+      {gid:'1212681019974361', name:'Marketing',          project:'1208998741527721'},
+      {gid:'1212545601219989', name:'People',             project:'1208998734799808'},
+      {gid:'1212816087341315', name:'Workouts',           project:'1208998741527729'}
     ],
     '1203122935275353': [
-      {gid:'1213830999493956', name:'Elevate Operations'},
-      {gid:'1213831324226859', name:'Academy'},
-      {gid:'1213831324226855', name:'Legal'},
-      {gid:'1213831324226863', name:'Marketing'},
-      {gid:'1213830999493941', name:'People'},
-      {gid:'1213831324226866', name:'Financiero'},
-      {gid:'1213830999493947', name:'Engagement'},
-      {gid:'1213830999493945', name:'Power Up'},
-      {gid:'1213830999493950', name:'Business Dev'},
-      {gid:'1214058200349927', name:'Workouts'}
+      {gid:'1213830999493956', name:'Elevate Operations',   project:'1208995793088056'},
+      {gid:'1213831324226859', name:'Academy',              project:'1208998741527738'},
+      {gid:'1213831324226855', name:'Legal',                project:'1209013952980960'},
+      {gid:'1213831324226863', name:'Marketing',            project:'1208998741527721'},
+      {gid:'1213830999493941', name:'People',               project:'1208998734799808'},
+      {gid:'1213831324226866', name:'Financiero',           project:'1208998741527742'},
+      {gid:'1213830999493947', name:'Engagement',           project:'1208998741527725'},
+      {gid:'1213830999493945', name:'Power Up',             project:'1208998741527760'},
+      {gid:'1213830999493950', name:'Business Dev',         project:'1208998741527746'},
+      {gid:'1214058200349927', name:'Workouts',             project:'1208998741527729'}
     ],
     '1203122935276440': [],
     '1203122935277490': []
@@ -430,6 +430,18 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       {gid:'1213939530361016',name:'Creation, update and governance flow implemented',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
       {gid:'1213939492461828',name:'Real activation of knowledge (bots / operations usage)',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'},
       {gid:'1213939492461835',name:'Maintenance and scalability model',completed:false,assignee:'Carlos Fernández',due_on:'2026-06-30'}
+    ],
+    // Q2 · Patricia Aldeamil OKR - 5% WO from affiliates
+    '1214059490220581': [
+      {gid:'1214059491238151',name:'Do the training with new approach',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'},
+      {gid:'1214059491238152',name:'Ensure the follow up through the website',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'},
+      {gid:'1214059491238153',name:'Obtain 5% WO coming from affiliates',completed:false,assignee:'Patricia Aldeamil',due_on:'2026-06-30'}
+    ],
+    // Q2 · Denis Torres OKR - Quality evaluations
+    '1213964203114586': [
+      {gid:'1213964202991096',name:'Execution and backlog recovery of evaluation calendar',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
+      {gid:'1213964202991103',name:'On-site validation and real context insights',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'},
+      {gid:'1213964203114575',name:'Data analysis and activation of preventive actions',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'}
     ]
   };
 
@@ -448,7 +460,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
   // ── STATE ────────────────────────────────────────────────────────────────────
   var state = {
     periodGid:'1203122935275353', periodName:'2T 2026',
-    areaGid:'', areaName:'',
+    areaGid:'', areaName:'', areaProject:'',
     status:'', goalGid:'', goalName:'', goalOwner:''
   };
 
@@ -486,29 +498,27 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     loadTasks(state.goalGid);
   });
 
-  // ── PERIOD ───────────────────────────────────────────────────────────────────
+  function renderAreas(){
+    var grid=document.getElementById('area-grid');
+    var areas=AREAS[state.periodGid]||[];
+    if(!areas.length){ grid.innerHTML='<div class="hint">No hay áreas para este trimestre aún.</div>'; return; }
+    grid.innerHTML=areas.map(function(a){
+      return '<button class="abtn'+(a.gid===state.areaGid?' active':'')+'" data-action="area" data-gid="'+a.gid+'" data-name="'+esc(a.name)+'" data-project="'+(a.project||'')+'">'
+           + '<div class="adot"></div>'+esc(a.name)+'</button>';
+    }).join('');
+  }
+
   function doPeriod(btn){
     state.periodGid=btn.dataset.gid; state.periodName=btn.dataset.name;
-    state.areaGid=''; state.areaName='';
+    state.areaGid=''; state.areaName=''; state.areaProject='';
     document.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
     renderAreas();
     resetOKR();
   }
 
-  // ── AREAS ────────────────────────────────────────────────────────────────────
-  function renderAreas(){
-    var grid=document.getElementById('area-grid');
-    var areas=AREAS[state.periodGid]||[];
-    if(!areas.length){ grid.innerHTML='<div class="hint">No hay áreas para este trimestre aún.</div>'; return; }
-    grid.innerHTML=areas.map(function(a){
-      return '<button class="abtn'+(a.gid===state.areaGid?' active':'')+'" data-action="area" data-gid="'+a.gid+'" data-name="'+esc(a.name)+'">'
-           + '<div class="adot"></div>'+esc(a.name)+'</button>';
-    }).join('');
-  }
-
   function doArea(btn){
-    state.areaGid=btn.dataset.gid; state.areaName=btn.dataset.name;
+    state.areaGid=btn.dataset.gid; state.areaName=btn.dataset.name; state.areaProject=btn.dataset.project||'';
     document.querySelectorAll('.abtn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
     populateGoals(state.areaGid);
@@ -547,26 +557,35 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     document.getElementById('ai-info').textContent='Selecciona tu OKR para ver los destinatarios automáticos.';
   }
 
-  // ── TASKS ────────────────────────────────────────────────────────────────────
+  // ── TASKS — siempre desde n8n, datos estáticos como preview inmediato ────────
   function loadTasks(goalGid){
     var tsec=document.getElementById('tasks-section');
     var hint=document.getElementById('tasks-hint');
     var list=document.getElementById('tasks-list');
-    var staticTasks=TASKS[goalGid];
 
-    if(staticTasks){
-      renderTaskList(staticTasks, tsec, hint, list); return;
-    }
-    // Intentar n8n si no hay datos estáticos
-    tsec.style.display='block'; hint.style.display='block'; hint.textContent='Cargando tareas...'; list.style.display='none'; list.innerHTML='';
-    fetch(N8N_TASKS+'?goal_gid='+goalGid)
-      .then(function(r){ return r.json(); })
+    tsec.style.display='block';
+
+    // Mostrar datos estáticos inmediatamente si existen (mientras carga n8n)
+    var staticTasks=TASKS[goalGid];
+    if(staticTasks){ renderTaskList(staticTasks, tsec, hint, list); }
+    else { hint.textContent='Cargando tareas...'; hint.style.display='block'; list.style.display='none'; list.innerHTML=''; }
+
+    // Siempre intentar cargar desde n8n con goal_gid + project_gid
+    var url=N8N_TASKS+'?goal_gid='+goalGid+(state.areaProject?'&project_gid='+state.areaProject:'');
+    fetch(url)
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
         var tasks=Array.isArray(data)?data:(data.tasks||data.data||[]);
-        if(!tasks||!tasks.length){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; return; }
+        if(!tasks||!tasks.length){
+          if(!staticTasks){ hint.textContent='Sin tareas conectadas.'; hint.style.display='block'; list.style.display='none'; }
+          return;
+        }
         renderTaskList(tasks, tsec, hint, list);
       })
-      .catch(function(){ hint.textContent='Sin tareas conectadas para este OKR.'; hint.style.display='block'; list.style.display='none'; });
+      .catch(function(){
+        // Si n8n falla y no hay estáticos, mostrar mensaje
+        if(!staticTasks){ hint.textContent='Sin tareas conectadas para este OKR.'; hint.style.display='block'; list.style.display='none'; }
+      });
   }
 
   function renderTaskList(tasks, tsec, hint, list){
@@ -643,34 +662,50 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var dateStr=today.getDate()+' '+months[today.getMonth()]+' '+today.getFullYear();
 
     var payload={
-      goal_gid:state.goalGid, goal_name:state.goalName, goal_owner:state.goalOwner,
-      area_gid:state.areaGid, area_name:state.areaName,
-      period:state.periodName, status:state.status, comment:comment,
-      extra_recipients:extra, date:dateStr, timestamp:new Date().toISOString(),
-      user_name:userName, user_email:state.goalOwner
+      goal_gid:        state.goalGid,
+      goal_name:       state.goalName,
+      goal_owner:      state.goalOwner,
+      area_gid:        state.areaGid,
+      area_name:       state.areaName,
+      area_project:    state.areaProject,
+      period:          state.periodName,
+      status:          state.status,
+      comment:         comment,
+      extra_recipients:extra,
+      date:            dateStr,
+      timestamp:       new Date().toISOString(),
+      user_name:       userName,
+      user_email:      state.goalOwner
     };
 
     var btn=document.getElementById('btn-submit');
     btn.disabled=true; btn.classList.add('loading'); btn.firstChild.nodeValue='Enviando... ';
 
-    fetch(N8N,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r; })
+    fetch(N8N, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    })
+      .then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return r;
+      })
       .then(function(){
         var sl=STATUS_MAP[state.status]?STATUS_MAP[state.status].label:state.status;
         document.getElementById('success-msg').textContent='"'+state.goalName+'" marcado como '+sl+'.';
         document.getElementById('fa').classList.add('hidden');
         document.getElementById('success-screen').classList.add('show');
       })
-      .catch(function(){
+      .catch(function(err){
         btn.disabled=false; btn.classList.remove('loading'); btn.firstChild.nodeValue='Enviar actualización ';
-        e.textContent='No se pudo conectar. Contacta con elevate.xcellence@brooklynfitboxing.com';
+        e.textContent='No se pudo conectar con el servidor. Error: '+err.message;
         e.className='errmsg show';
       });
   }
 
   // ── RESET ────────────────────────────────────────────────────────────────────
   function doReset(){
-    state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner=''; state.areaGid=''; state.areaName='';
+    state.status=''; state.goalGid=''; state.goalName=''; state.goalOwner=''; state.areaGid=''; state.areaName=''; state.areaProject='';
     document.getElementById('f-name').value='';
     document.getElementById('f-comment').value='';
     document.getElementById('extra-email').value='';
