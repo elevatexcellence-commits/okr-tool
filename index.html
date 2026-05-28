@@ -512,8 +512,8 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       {gid:'1213964203114584',name:'　→ Deliver mini report June (root cause + action + result)',completed:false,assignee:'Denis Torres',due_on:'2026-06-30'}
     ],
     '1214163639541078': [ // Martina Marano Q2 - Brooklyn Brain MDs
-      {gid:'1214163737693844',name:'100% of MDs planned for April are created and reviewed',completed:false,assignee:'Martina Marano',due_on:'2026-04-30'},
-      {gid:'1214163737693847',name:'100% of MDs planned for May are created and reviewed',completed:false,assignee:'Martina Marano',due_on:'2026-05-31'},
+      {gid:'1214163737693844',name:'100% of MDs planned for April are created and reviewed',completed:true,assignee:'Martina Marano',due_on:'2026-04-30'},
+      {gid:'1214163737693847',name:'100% of MDs planned for May are created and reviewed',completed:true,assignee:'Martina Marano',due_on:'2026-05-31'},
       {gid:'1214163737693848',name:'100% of MDs planned for June are created and reviewed',completed:false,assignee:'Martina Marano',due_on:'2026-06-30'},
       {gid:'1214163737693849',name:'Develop an AI-powered tool for MD updates',completed:false,assignee:'Martina Marano',due_on:'2026-06-30'},
       {gid:'1214163737693850',name:'Achieve a usability rate of ≥80%',completed:false,assignee:'Martina Marano',due_on:'2026-06-30'},
@@ -801,40 +801,51 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var tsec=document.getElementById('tasks-section');
     var hint=document.getElementById('tasks-hint');
     var list=document.getElementById('tasks-list');
-    var staticTasks=TASKS[goalGid];
 
-    // Si hay datos estáticos, mostrarlos y no llamar a n8n
+    // Mostrar datos estáticos inmediatamente mientras carga n8n
+    var staticTasks=TASKS[goalGid];
+    tsec.style.display='block';
     if(staticTasks && staticTasks.length){
-      tsec.style.display='block';
       hint.style.display='none';
       renderTaskList(staticTasks, tsec, hint, list);
-      return;
+    } else {
+      hint.textContent='Cargando tareas...';
+      hint.style.display='block';
+      list.style.display='none';
+      list.innerHTML='';
     }
 
-    // Solo llamar a n8n si no hay datos estáticos
-    tsec.style.display='block';
-    hint.textContent='Cargando tareas...';
-    hint.style.display='block';
-    list.style.display='none';
-    list.innerHTML='';
-
-    var url=N8N_TASKS+'?goal_gid='+goalGid+'&project_gid='+(state.areaProject||'');
-    fetch(url)
+    // Siempre cargar desde n8n via POST (sin CORS preflight)
+    fetch(N8N_TASKS, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        goal_gid: goalGid,
+        project_gid: state.areaProject || '',
+        area_name: state.areaName,
+        period: state.periodName
+      })
+    })
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
         var tasks=Array.isArray(data)?data:(data.tasks||data.subtasks||data.data||[]);
         if(!tasks||!tasks.length){
-          hint.textContent='Sin tareas conectadas para este OKR.';
-          hint.style.display='block';
-          list.style.display='none';
+          if(!staticTasks||!staticTasks.length){
+            hint.textContent='Sin tareas conectadas para este OKR.';
+            hint.style.display='block';
+            list.style.display='none';
+          }
           return;
         }
         renderTaskList(tasks, tsec, hint, list);
       })
       .catch(function(){
-        hint.textContent='Sin tareas para este OKR.';
-        hint.style.display='block';
-        list.style.display='none';
+        // Si n8n falla, mantener los datos estáticos
+        if(!staticTasks||!staticTasks.length){
+          hint.textContent='Sin tareas para este OKR.';
+          hint.style.display='block';
+          list.style.display='none';
+        }
       });
   }
 
