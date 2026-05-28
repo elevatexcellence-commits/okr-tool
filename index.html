@@ -520,7 +520,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       {gid:'1214163737841933',name:'Convert at least 30 MDs by the end of the quarter',completed:false,assignee:'Martina Marano',due_on:'2026-06-30'}
     ],
     '1214057454860969': [ // Carlos de la Iglesia - Zendesk automation
-      {gid:'1214059505768354',name:'Analysis of automation options',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'},
+      {gid:'1214059505768354',name:'Analysis of automation options',completed:true,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'},
       {gid:'1214059505839087',name:'Automation testing and data review',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'},
       {gid:'1214059505839088',name:'Test results',completed:false,assignee:'Carlos de la Iglesia',due_on:'2026-06-30'}
     ],
@@ -821,6 +821,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         goal_gid: goalGid,
+        task_gid: TASK_GIDS[goalGid] || '',
         project_gid: state.areaProject || '',
         area_name: state.areaName,
         period: state.periodName
