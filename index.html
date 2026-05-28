@@ -272,7 +272,43 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var el=document.getElementById(id); if(el) el.value=EMAILS[id];
   });
 
-  // ── AREAS por período (con project GID para cargar tareas) ──────────────────
+  // ── TASK GIDs por goal GID (para que n8n encuentre la tarea) ────────────────
+  var TASK_GIDS = {
+    // Q1 Elevate Operations
+    '1212696402802293':'1212625366065915','1212696396083776':'1212625366065907',
+    '1212696396083765':'1212625366065899','1212744713197841':'1212744713197842',
+    '1212744713197818':'1212744713197819','1212744713197791':'1212744713197792',
+    '1212744713197769':'1212744713197770','1212708945443289':'1212708945443290',
+    '1212744593192041':'1212744593192042','1212546340109270':'1212546340109271',
+    '1212688098845405':'1212688098845406','1212742783892632':'1212742783892633',
+    '1212742795581488':'1212742795581489','1212742795581491':'1212742795581492',
+    '1212742795581494':'1212742795581495','1212898035948453':'1212898035948454',
+    '1212678989896210':'1212678989896211',
+    // Q1 Academy
+    '1212724667993059':'1212690053748339','1212724671605445':'1212690053748337',
+    '1212707980990776':'1212690053748335','1212707980990752':'1212690053748333',
+    '1213227524781322':'1213244900774970',
+    // Q2 Elevate Operations
+    '1213939067410334':'1213939530361002','1214163639541078':'1214163737693836',
+    '1213964203114586':'1213964202991092','1214057454860969':'1214061100243154',
+    '1214059513422349':'1214061100243151','1214058669344864':'1214061100243147',
+    '1214061100243165':'1214057133008891','1214057454860953':'1214057133008888',
+    '1214055977420631':'1214059491238158','1213964203114586':'1213964202991092',
+    // Q2 Academy
+    '1214059490220581':'1214059491238149','1214115503005261':'1214078512077518',
+    '1214115503005270':'1214092078165144','1214115503005279':'1214092078165155',
+    '1214115503013262':'1214092078165165',
+    // Q2 Legal
+    '1214078156619837':'1214059488262041','1214078156619834':'1214059488262030',
+    '1214078167143256':'1214059484420807',
+    // Q2 People
+    '1213889773139317':'1213889757378710',
+    // Q2 Financiero
+    '1214016584990642':'1214146552053058','1214016584990571':'1214146552053065',
+    '1214016584990607':'1214146552053061','1214016583243714':'1214146552053069',
+    // Q2 Workouts
+    '1214058408968435':'1214058280777729','1214057421970739':'1214057421970740'
+  };
   var AREAS = {
     '1203122935275327': [
       {gid:'1212556603278689', name:'Elevate Operations', project:'1208995793088056'},
@@ -835,8 +871,16 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var gid=cb.dataset.gid; var done=cb.checked;
     var nameEl=document.getElementById('tn-'+gid);
     if(nameEl) nameEl.className='tname'+(done?' done':'');
-    fetch(N8N_DONE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_gid:gid,completed:done})})
-      .catch(function(){ cb.checked=!done; if(nameEl) nameEl.className='tname'+(!done?' done':''); });
+    // no-cors porque no necesitamos leer la respuesta
+    fetch(N8N_DONE,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({task_gid:gid,completed:done})
+    }).catch(function(){
+      cb.checked=!done;
+      if(nameEl) nameEl.className='tname'+(!done?' done':'');
+    });
   }
 
   // ── TASK COMMENT ─────────────────────────────────────────────────────────────
@@ -851,9 +895,19 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
     var text=ta?ta.value.trim():''; if(!text) return;
     var userName=(document.getElementById('f-name').value||'').trim()||'Xcellence';
     btn.textContent='...'; btn.disabled=true;
-    fetch(N8N_COMMENT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_gid:gid,comment:text,user_name:userName})})
-      .then(function(){ document.getElementById('comment-area-'+gid).style.display='none'; document.getElementById('comment-sent-'+gid).style.display='block'; btn.textContent='Guardar'; btn.disabled=false; })
-      .catch(function(){ btn.textContent='Guardar'; btn.disabled=false; });
+    // no-cors porque no necesitamos leer la respuesta
+    fetch(N8N_COMMENT,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({task_gid:gid,comment:text,user_name:userName})
+    }).then(function(){
+      document.getElementById('comment-area-'+gid).style.display='none';
+      document.getElementById('comment-sent-'+gid).style.display='block';
+      btn.textContent='Guardar'; btn.disabled=false;
+    }).catch(function(){
+      btn.textContent='Guardar'; btn.disabled=false;
+    });
   }
 
   // ── SUBMIT ───────────────────────────────────────────────────────────────────
@@ -879,6 +933,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--gl
       goal_gid:        state.goalGid,
       goal_name:       state.goalName,
       goal_owner:      state.goalOwner,
+      task_gid:        TASK_GIDS[state.goalGid] || '',
       area_gid:        state.areaGid,
       area_name:       state.areaName,
       area_project:    state.areaProject,
